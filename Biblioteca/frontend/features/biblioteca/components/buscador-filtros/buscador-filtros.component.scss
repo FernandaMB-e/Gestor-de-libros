@@ -1,0 +1,85 @@
+/* Contenedor principal */
+.barra-filtros-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); 
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* El truco de la línea única */
+.fila-unica {
+  display: flex;
+  flex-wrap: wrap; /* Si la pantalla es chica, lo pasa abajo automáticamente */
+  align-items: center; /* Centra todo en la misma línea horizontal */
+  gap: 1rem; /* Espacio uniforme entre TODOS los elementos */
+}
+
+/* 1. Buscador */
+.buscador-input {
+  flex: 1; /* Esto hace que el buscador ocupe todo el espacio sobrante */
+  min-width: 200px;
+  margin-bottom: -1.25em; /* Quita el margen de error invisible */
+}
+
+/* 2. Todos los botones sólidos */
+.btn-buscar, .btn-favoritos, .btn-todos {
+  height: 56px; /* Altura idéntica a los desplegables */
+  border-radius: 8px;
+  color: white !important;
+  font-weight: 500;
+  padding: 0 1.5rem;
+}
+
+.btn-buscar { background-color: #2e5c53 !important; }
+.btn-favoritos { background-color: #3b82f6 !important; }
+.btn-todos { background-color: #eab308 !important; }
+
+/* 3. Desplegables (Selects) */
+.filtro-select {
+  width: 150px;
+  margin-bottom: -1.25em; /* Alineación perfecta con los botones */
+}
+
+/* === SOLUCIÓN AL COLOR DE LOS DESPLEGABLES === */
+::ng-deep {
+  /* Apagamos los bordes feos de Material */
+  .filtro-select .mdc-notched-outline {
+    display: none !important; 
+  }
+
+  /* Redondeamos el contenedor principal */
+  .filtro-select .mdc-text-field--outlined {
+    border-radius: 8px;
+  }
+
+  /* Pintamos el fondo abarcando el 100% de la caja */
+  .btn-estado .mdc-text-field--outlined { background-color: #ea9121 !important; }
+  .btn-disposicion .mdc-text-field--outlined { background-color: #d946ef !important; }
+  .btn-puntuacion .mdc-text-field--outlined { background-color: #ec4899 !important; }
+
+  .btn-puntuacion {
+  width: 240px !important; 
+}
+
+  /* Aseguramos que el texto, label y la flechita sean blancos */
+  .filtro-select .mat-mdc-select-value-text, 
+  .filtro-select .mat-mdc-select-arrow, 
+  .filtro-select .mat-mdc-form-field-label {
+    color: white !important;
+  }
+
+  /* Estilos de las estrellas */
+  .opcion-puntuacion { 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+  }
+  
+  .star-gold { 
+    color: #FFD700 !important; 
+    font-size: 20px; 
+    height: 20px; 
+    width: 20px; 
+  }
+}

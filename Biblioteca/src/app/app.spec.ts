@@ -16,8 +16,9 @@ describe('App', () => {
 
   it('should render title', async () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    fixture.detectChanges(); // Necesario para que las Signals se rendericen
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Biblioteca');
+    // Ahora el título es "Biblioteca" (por el signal que definiste)
+    expect(compiled.querySelector('h1')?.textContent).toContain('Biblioteca');
   });
 });

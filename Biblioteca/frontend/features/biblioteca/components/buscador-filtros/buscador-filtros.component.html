@@ -1,0 +1,84 @@
+<div class="barra-filtros-container">
+  <div class="fila-unica">
+    
+    <mat-form-field appearance="outline" class="buscador-input">
+      <mat-label>Buscar libro</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+       
+      <input matInput [(ngModel)]="textoBusqueda" placeholder="Por titulo, autor o género"/>
+    </mat-form-field>
+    
+    <button mat-flat-button class="btn-buscar" (click)="ejecutarBusqueda()">Buscar</button>
+
+    <mat-form-field appearance="outline" class="filtro-select btn-estado">
+      <mat-select placeholder="Estado" [(ngModel)]="estadoSeleccionado" (selectionChange)="onFiltroCambio()">
+        <mat-option value="Leyendo">Leyendo</mat-option>
+        <mat-option value="Leídos">Leídos</mat-option>
+        <mat-option value="Pendientes por leer">Pendientes por leer</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filtro-select btn-disposicion">
+      <mat-select placeholder="Disposición" [(ngModel)]="disposicionSeleccionada" (selectionChange)="onFiltroCambio()">
+        <mat-option value="Disponible">Disponible</mat-option>
+        <mat-option value="Prestado">Prestado</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filtro-select btn-puntuacion">
+      <mat-select placeholder="Puntuación" [(ngModel)]="puntuacionSeleccionada" (selectionChange)="onFiltroCambio()">
+        
+        <mat-select-trigger>
+          <span class="opcion-puntuacion" *ngIf="puntuacionSeleccionada">
+            <mat-icon class="star-gold" *ngIf="puntuacionSeleccionada >= 1">star</mat-icon>
+            <mat-icon class="star-gold" *ngIf="puntuacionSeleccionada >= 2">star</mat-icon>
+            <mat-icon class="star-gold" *ngIf="puntuacionSeleccionada >= 3">star</mat-icon>
+            <mat-icon class="star-gold" *ngIf="puntuacionSeleccionada >= 4">star</mat-icon>
+            <mat-icon class="star-gold" *ngIf="puntuacionSeleccionada === 5">star</mat-icon>
+          </span>
+        </mat-select-trigger>
+
+        <mat-option [value]="5">
+          <span class="opcion-puntuacion">
+            <mat-icon class="star-gold">star</mat-icon><mat-icon class="star-gold">star</mat-icon>
+            <mat-icon class="star-gold">star</mat-icon><mat-icon class="star-gold">star</mat-icon>
+            <mat-icon class="star-gold">star</mat-icon>
+          </span>
+        </mat-option>
+
+        <mat-option [value]="4">
+          <span class="opcion-puntuacion">
+            <mat-icon class="star-gold">star</mat-icon><mat-icon class="star-gold">star</mat-icon>
+            <mat-icon class="star-gold">star</mat-icon><mat-icon class="star-gold">star</mat-icon>
+          </span>
+        </mat-option>
+
+        <mat-option [value]="3">
+          <span class="opcion-puntuacion">
+            <mat-icon class="star-gold">star</mat-icon><mat-icon class="star-gold">star</mat-icon>
+            <mat-icon class="star-gold">star</mat-icon>
+          </span>
+        </mat-option>
+
+        <mat-option [value]="2">
+          <span class="opcion-puntuacion">
+            <mat-icon class="star-gold">star</mat-icon><mat-icon class="star-gold">star</mat-icon>
+          </span>
+        </mat-option>
+
+        <mat-option [value]="1">
+          <span class="opcion-puntuacion">
+            <mat-icon class="star-gold">star</mat-icon>
+          </span>
+        </mat-option>
+
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-flat-button class="btn-favoritos" (click)="toggleFavoritos()" [class.activo]="favoritos">
+      Favoritos
+    </button>
+    <button mat-flat-button class="btn-todos" (click)="mostrarTodos()">Todos</button>
+    
+  </div>
+</div>
