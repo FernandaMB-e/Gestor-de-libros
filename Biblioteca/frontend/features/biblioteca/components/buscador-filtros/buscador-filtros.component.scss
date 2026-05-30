@@ -39,6 +39,7 @@
 .filtro-select {
   width: 150px;
   margin-bottom: -1.25em; /* Alineación perfecta con los botones */
+   color: white !important;
 }
 
 /* === SOLUCIÓN AL COLOR DE LOS DESPLEGABLES === */
@@ -66,7 +67,7 @@
   .filtro-select .mat-mdc-select-value-text, 
   .filtro-select .mat-mdc-select-arrow, 
   .filtro-select .mat-mdc-form-field-label {
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
   }
 
   /* Estilos de las estrellas */

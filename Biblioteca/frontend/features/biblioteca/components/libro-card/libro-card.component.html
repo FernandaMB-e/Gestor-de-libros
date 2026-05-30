@@ -1,0 +1,35 @@
+<div class="libro-card">
+  
+  <div class="portada-wrapper">
+    <img [src]="libro.portada" [alt]="libro.titulo" class="portada-img">
+
+    <button mat-icon-button class="btn-esquina" title="Ver detalles">
+      <mat-icon>open_in_new</mat-icon> 
+    </button>
+
+    <button mat-icon-button class="btn-favorito" (click)="toggleFavorito()">
+      <mat-icon [class.corazon-rojo]="libro.favorito">
+        {{ libro.favorito ? 'favorite' : 'favorite_border' }}
+      </mat-icon>
+    </button>
+  </div>
+
+  <div class="info-container">
+    
+    <h3 class="titulo" [title]="libro.titulo">{{ libro.titulo }}</h3>
+    <p class="autor">{{ libro.autor }}</p>
+
+    <div class="puntuacion">
+      <mat-icon *ngFor="let estrella of estrellas"
+                [class.star-gold]="libro.puntuacion >= estrella"
+                [class.star-gray]="libro.puntuacion < estrella">
+        star
+      </mat-icon>
+    </div>
+
+    <div class="estado-badge" [ngClass]="obtenerClaseEstado(libro.estado)">
+      {{ libro.estado }}
+    </div>
+
+  </div>
+</div>

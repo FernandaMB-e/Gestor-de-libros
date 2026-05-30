@@ -1,0 +1,65 @@
+<div class="resumen-card">
+  <h2 class="titulo-resumen">Resumen</h2>
+
+  <div class="lista-estadisticas">
+    
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-totales">library_books</mat-icon>
+        <span>Libros totales</span>
+      </div>
+      <span class="badge badge-totales">{{ totales }}</span>
+    </div>
+
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-leyendo">menu_book</mat-icon>
+        <span>Leyendo</span>
+      </div>
+      <span class="badge badge-leyendo">{{ leyendo }}</span>
+    </div>
+
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-leidos">check_circle</mat-icon>
+        <span>Leídos</span>
+      </div>
+      <span class="badge badge-leidos">{{ leidos }}</span>
+    </div>
+
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-pendientes">schedule</mat-icon>
+        <span>Pendientes por leer</span>
+      </div>
+      <span class="badge badge-pendientes">{{ pendientes }}</span>
+    </div>
+
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-favoritos">favorite</mat-icon>
+        <span>Favoritos</span>
+      </div>
+      <span class="badge badge-favoritos">{{ favoritos }}</span>
+    </div>
+
+    <hr class="divisor" />
+
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-prestados">swap_horiz</mat-icon>
+        <span>Prestados</span>
+      </div>
+      <span class="badge badge-prestados">{{ prestados }}</span>
+    </div>
+
+    <div class="fila-stat">
+      <div class="label-stat">
+        <mat-icon class="icon-disponibles">event_available</mat-icon>
+        <span>Disponibles</span>
+      </div>
+      <span class="badge badge-disponibles">{{ disponibles }}</span>
+    </div>
+
+  </div>
+</div>

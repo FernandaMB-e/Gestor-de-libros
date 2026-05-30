@@ -1,0 +1,134 @@
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+.app-container {
+  padding: 2rem 4rem; /* 2rem de espacio arriba/abajo y 4rem a los lados */
+  max-width: 1440px; /* Evita que se estire al infinito en monitores muy grandes */
+  margin: 0 auto; /* Centra el contenedor en la pantalla */
+  box-sizing: border-box;
+}
+
+/* =========================================
+   ENCABEZADO
+   ========================================= */
+.header-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0; 
+  }
+
+  /* Botón superior derecho */
+  .btn-agregar-top {
+    background-color: #2e5c53 !important; /* El color verde oscuro de tus botones */
+    color: white !important;
+    height: 48px;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 0 1.5rem;
+  }
+}
+
+/* =========================================
+   ESTILOS DEL ESTADO VACÍO
+   ========================================= */
+.estado-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Sombra sutil igual a la barra */
+  margin-top: 2rem;
+
+  .icono-vacio {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: #6b7280;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .btn-agregar-center {
+    background-color: #2e5c53 !important;
+    color: white !important;
+    height: 56px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    padding: 0 2.5rem;
+  }
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL 
+   ========================================= */
+.layout-principal {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: flex-start; /* Evita que el resumen se estire verticalmente */
+}
+
+/* Columna izquierda (Libros) */
+.seccion-libros {
+  flex: 1; /* Toma todo el espacio disponible */
+}
+
+/* Columna derecha (Resumen) */
+.seccion-sidebar {
+  width: 320px; /* Ancho fijo para la tarjeta de estadísticas */
+  flex-shrink: 0; /* Evita que se aplaste en pantallas pequeñas */
+}
+
+/* =========================================
+   TARJETAS Y TÍTULOS DE SECCIÓN
+   ========================================= */
+/* Estilo para el título de la sección dinámica*/
+.titulo-seccion {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #374151; 
+  margin-top: 0;
+  margin-bottom: 1.5rem; 
+  border-bottom: 2px solid #e5e7eb; 
+  padding-bottom: 0.5rem;
+}
+
+/* El contenedor de las tarjetas */
+.grid-tarjetas {
+  display: flex; 
+  gap: 2rem; 
+  flex-wrap: wrap;
+}
