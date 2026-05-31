@@ -1,0 +1,40 @@
+<div class="auth-pantalla">
+  <div class="auth-card">
+    
+    <div class="auth-header">
+      <mat-icon class="icono-logo">menu_book</mat-icon>
+      <h2>Bienvenido de nuevo</h2>
+      <p>Ingresa tus datos para acceder a tu biblioteca</p>
+    </div>
+
+    <form (ngSubmit)="iniciarSesion()" class="auth-form">
+      
+      <mat-form-field appearance="outline" class="campo-full-width">
+        <mat-label>Correo electrónico</mat-label>
+        <mat-icon matPrefix class="icono-gris">mail</mat-icon>
+        <input matInput type="email" [(ngModel)]="correo" name="correo" placeholder="ejemplo@correo.com" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="campo-full-width">
+        <mat-label>Contraseña</mat-label>
+        <mat-icon matPrefix class="icono-gris">lock</mat-icon>
+        
+        <input matInput [type]="ocultarPassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+        
+        <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword" type="button" class="btn-ojito">
+          <mat-icon>{{ ocultarPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-flat-button class="btn-entrar" type="submit" [disabled]="!correo || !password">
+        Iniciar Sesión
+      </button>
+
+    </form>
+
+    <div class="auth-footer">
+      <p>¿No tienes una cuenta? <span class="link-accion">Regístrate</span></p>
+    </div>
+
+  </div>
+</div>

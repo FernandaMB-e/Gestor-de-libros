@@ -1,0 +1,113 @@
+/* Fondo que ocupa toda la pantalla */
+.auth-pantalla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ocupa el 100% del alto de la ventana */
+  background-color: #f9fafb; /* Gris ultra claro */
+  padding: 1rem;
+}
+
+/* La tarjeta blanca */
+.auth-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 420px; /* Tamaño ideal para un login */
+  box-sizing: border-box;
+}
+
+/* Textos de la cabecera */
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .icono-logo {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: #2e5c53;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+}
+
+/* Estilos del formulario */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Espaciado entre los inputs */
+
+  .campo-full-width {
+    width: 100%;
+  }
+
+  .icono-gris {
+    color: #9ca3af;
+    margin-right: 8px; /* Separa el icono del texto */
+  }
+
+  .btn-ojito {
+    color: #9ca3af;
+  }
+
+  /* Botón verde salvia */
+  .btn-entrar {
+    background-color: #2e5c53 !important;
+    color: white !important;
+    height: 52px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    width: 100%;
+
+    /* Estilo cuando el botón está deshabilitado */
+    &:disabled {
+      background-color: #e5e7eb !important;
+      color: #9ca3af !important;
+    }
+  }
+}
+
+/* Footer y enlace de registro */
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  
+  p {
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+
+  .link-accion {
+    color: #2e5c53;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+
+    &:hover {
+      color: #1f423b; /* Un tono más oscuro al pasar el ratón */
+    }
+  }
+}
+
+/* Quita el borde redondeado extraño de los form-fields de Material si lo hubiera */
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 8px !important;
+}

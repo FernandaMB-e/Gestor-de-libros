@@ -1,0 +1,43 @@
+<main class="app-container">
+  
+  <div class="header-principal">
+    
+    <app-barra-principal [tituloPagina]="title()"></app-barra-principal>
+    
+    <button mat-flat-button class="btn-agregar-top" *ngIf="libros.length > 0" (click)="agregarLibroTemporal()">
+      <mat-icon>add</mat-icon> Agregar libro
+    </button>
+  </div>
+
+  <app-buscador-filtros (filtrosCambio)="actualizarTitulo($event)"></app-buscador-filtros>
+
+  <div class="estado-vacio" *ngIf="libros.length === 0">
+    <div class="icono-vacio">
+      <mat-icon>auto_stories</mat-icon> 
+    </div>
+    <h2>No tienes ningún libro por el momento</h2>
+    <p>Puedes comenzar a agregar libros pulsando el siguiente botón</p>
+    
+    <button mat-flat-button class="btn-agregar-center" (click)="agregarLibroTemporal()">
+      Agregar libro
+    </button>
+  </div>
+
+  <div class="layout-principal" *ngIf="libros.length > 0">
+    
+    <div class="seccion-libros">
+      <h2 class="titulo-seccion">{{ tituloSeccion }}</h2>
+
+      <div class="grid-tarjetas">
+        <app-libro-card *ngFor="let libroItem of libros" [libro]="libroItem"></app-libro-card>
+      </div>
+    </div>
+
+    <div class="seccion-sidebar">
+      <app-resumen-estadisticas [libros]="libros"></app-resumen-estadisticas>
+    </div>
+
+  </div>
+
+  
+</main>
