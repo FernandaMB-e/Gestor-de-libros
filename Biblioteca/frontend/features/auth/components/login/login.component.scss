@@ -1,113 +1,145 @@
-/* Fondo que ocupa toda la pantalla */
 .auth-pantalla {
+  display: flex;
+  min-height: 100vh;
+  background: #F5FBF5;
+}
+
+/* Imagen izquierda */
+.lado-imagen {
+  width: 28%;
+  min-width: 280px;
+}
+
+.lado-imagen img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Login derecha */
+.lado-login {
+  width: 72%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ocupa el 100% del alto de la ventana */
-  background-color: #F2FFF5; /* Gris ultra claro */
-  padding: 1rem;
 }
 
-/* La tarjeta blanca */
 .auth-card {
-  background-color: #fbfefc;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  padding: 3rem 2.5rem;
-  width: 100%;
-  max-width: 420px; /* Tamaño ideal para un login */
-  box-sizing: border-box;
+  width: 420px;
 }
 
-/* Textos de la cabecera */
+/* Encabezado */
 .auth-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 
   .icono-logo {
     font-size: 48px;
-    height: 48px;
     width: 48px;
-    color: #2e5c53;
-    margin-bottom: 1rem;
+    height: 48px;
+    color: #1F6B46;
+    margin-bottom: 0.8rem;
   }
 
   h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin: 0 0 0.5rem 0;
+    margin: 0;
+    font-size: 2.2rem;
+    font-family: Georgia, serif;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.1;
   }
 
   p {
-    color: #6b7280;
-    font-size: 0.95rem;
-    margin: 0;
+    margin-top: 0.3rem;
+    color: #6B7280;
+    font-size: 0.9rem;
+  }
+
+  h3 {
+    margin-top: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #222;
   }
 }
 
-/* Estilos del formulario */
+/* Formulario */
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Espaciado entre los inputs */
+  gap: 0.8rem;
 
   .campo-full-width {
     width: 100%;
   }
 
-  .icono-gris {
-    color: #9ca3af;
-    margin-right: 8px; /* Separa el icono del texto */
-  }
-
+  .icono-gris,
   .btn-ojito {
-    color: #9ca3af;
+    color: #9CA3AF;
   }
 
-  /* Botón verde salvia */
   .btn-entrar {
-    background-color: #2e5c53 !important;
-    color: white !important;
-    height: 52px;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-top: 1rem;
-    width: 100%;
+    width: 280px;
+    height: 50px;
 
-    /* Estilo cuando el botón está deshabilitado */
+    margin: 1.2rem auto 0;
+    display: block;
+
+    border-radius: 30px !important;
+    background-color: #2b6356 !important;
+    color: white !important;
+
+    font-size: 1rem;
+    font-weight: 500;
+
     &:disabled {
-      background-color: #e5e7eb !important;
-      color: #9ca3af !important;
+      background-color: #298268 !important;
+      color: white !important;
     }
   }
 }
 
-/* Footer y enlace de registro */
+/* Footer */
 .auth-footer {
   text-align: center;
-  margin-top: 2rem;
-  
+  margin-top: 1.2rem;
+
   p {
-    color: #6b7280;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: #6B7280;
   }
 
   .link-accion {
-    color: #2e5c53;
+    color: #3E8F7C;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    text-decoration: none;
 
     &:hover {
-      color: #1f423b; /* Un tono más oscuro al pasar el ratón */
+      text-decoration: underline;
     }
   }
 }
 
-/* Quita el borde redondeado extraño de los form-fields de Material si lo hubiera */
+/* Angular Material */
+::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
 ::ng-deep .mat-mdc-text-field-wrapper {
-  border-radius: 8px !important;
+  border-radius: 6px !important;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.contenedor-boton {
+  display: flex;
+  justify-content: center;
 }
