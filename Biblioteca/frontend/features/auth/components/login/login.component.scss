@@ -1,7 +1,7 @@
 .auth-pantalla {
   display: flex;
   min-height: 100vh;
-  background: #F5FBF5;
+  background: #e9f8e9;
 }
 
 /* Imagen izquierda */
@@ -17,7 +17,7 @@
   display: block;
 }
 
-/* Login derecha */
+/* Panel derecho */
 .lado-login {
   width: 72%;
   display: flex;
@@ -26,111 +26,14 @@
 }
 
 .auth-card {
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
 }
 
 /* Encabezado */
 .auth-header {
   text-align: center;
-  margin-bottom: 1.8rem;
-
-  .icono-logo {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    color: #1F6B46;
-    margin-bottom: 0.8rem;
-  }
-
-  h2 {
-    margin: 0;
-    font-size: 2.2rem;
-    font-family: Georgia, serif;
-    font-weight: 500;
-    color: #222;
-    line-height: 1.1;
-  }
-
-  p {
-    margin-top: 0.3rem;
-    color: #6B7280;
-    font-size: 0.9rem;
-  }
-
-  h3 {
-    margin-top: 1.8rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #222;
-  }
-}
-
-/* Formulario */
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-
-  .campo-full-width {
-    width: 100%;
-  }
-
-  .icono-gris,
-  .btn-ojito {
-    color: #9CA3AF;
-  }
-
-  .btn-entrar {
-    width: 280px;
-    height: 50px;
-
-    margin: 1.2rem auto 0;
-    display: block;
-
-    border-radius: 30px !important;
-    background-color: #2b6356 !important;
-    color: white !important;
-
-    font-size: 1rem;
-    font-weight: 500;
-
-    &:disabled {
-      background-color: #298268 !important;
-      color: white !important;
-    }
-  }
-}
-
-/* Footer */
-.auth-footer {
-  text-align: center;
-  margin-top: 1.2rem;
-
-  p {
-    font-size: 0.9rem;
-    color: #6B7280;
-  }
-
-  .link-accion {
-    color: #3E8F7C;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-/* Angular Material */
-::ng-deep .mat-mdc-form-field {
-  width: 100%;
-}
-
-::ng-deep .mat-mdc-text-field-wrapper {
-  border-radius: 6px !important;
+  margin-bottom: 2rem;
 }
 
 .logo-container {
@@ -139,7 +42,113 @@
   margin-bottom: 10px;
 }
 
-.contenedor-boton {
+.icono-logo {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #1F6B46;
+}
+
+.auth-header h2 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-family: Georgia, serif;
+  font-weight: 500;
+  color: #222;
+}
+
+.auth-header p {
+  margin-top: 0.3rem;
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+.auth-header h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Formulario */
+.auth-form {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.grupo-campo {
+  width: 100%;
+}
+
+.titulo-campo {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.campo-full-width {
+  width: 100%;
+}
+
+.icono-gris {
+  color: #9CA3AF;
+}
+
+.btn-ojito {
+  color: #9CA3AF;
+}
+
+.btn-entrar {
+  width: 100%;
+  height: 52px;
+
+  background-color: #078265 !important;
+  color: white !important;
+
+  border-radius: 30px !important;
+
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.btn-entrar:active {
+  background-color: #165143 !important;
+}
+
+
+/* Footer */
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.auth-footer p {
+  font-size: 0.9rem;
+  color: #6B7280;
+}
+
+.link-accion {
+  color: #3E8F7C;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link-accion:hover {
+  text-decoration: underline;
+}
+
+/* Angular Material */
+::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 8px !important;
 }
