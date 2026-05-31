@@ -150,3 +150,23 @@
 ::ng-deep .mat-mdc-text-field-wrapper {
   border-radius: 8px !important;
 }
+
+
+.login-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #4b5563;
+
+  a {
+    margin-left: 0.3rem;
+    color: #0f8b6d;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
