@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { Router } from '@angular/router';
 // 1. RUTAS RELATIVAS: Como vista-principal ya está en la carpeta 'components', 
 // solo necesitamos subir un nivel (../) para encontrar a los demás componentes.
 import { BuscadorFiltrosComponent, FiltrosBusqueda } from '../biblioteca/components/buscador-filtros/buscador-filtros.component';
@@ -51,10 +51,25 @@ export class VistaPrincipalComponent { // 5. CAMBIO: Ya no se llama App, se llam
     this.libros.push({
       titulo: 'Fuego y Sangre',
       autor: 'George R. R. Martin',
-      portada: 'https://m.media-amazon.com/images/I/81zBqbqw1lL._AC_UF1000,1000_QL80_.jpg',
+      portada: '/img/Portada.jpg',
       puntuacion: 5,
       estado: 'Pendientes por leer',
       favorito: true
     });
   }
+
+  constructor(private router: Router) {}
+
+  irAPerfil() {
+  this.router.navigate(['/perfil']);
 }
+
+cerrarSesion() {
+  // Aquí puedes limpiar localStorage o tokens si los usas
+  localStorage.clear(); 
+  this.router.navigate(['/login']);
+}
+
+  
+}
+
