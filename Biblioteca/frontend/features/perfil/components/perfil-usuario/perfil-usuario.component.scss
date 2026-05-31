@@ -1,102 +1,143 @@
 .perfil-pantalla {
+  min-height: 100vh;
+  background-color: #edf8ee;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f9fafb;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .perfil-card {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  padding: 3rem;
+  background: #fff;
   width: 100%;
-  max-width: 400px;
-  text-align: center;
-  box-sizing: border-box;
+  max-width: 600px;
+  min-height: 350px;
+  padding: 4rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .perfil-header {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 
   h2 {
-    font-size: 1.8rem;
-    color: #1f2937;
-    margin: 0 0 0.5rem 0;
-    font-weight: 700;
-  }
-
-  p {
-    color: #6b7280;
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
   }
 }
 
-/* --- ESTILOS DEL AVATAR --- */
+.perfil-contenido {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+/* ===== AVATAR ===== */
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .avatar-container {
-  position: relative;
-  width: 130px;
-  height: 130px;
-  margin: 0 auto 2.5rem auto; /* Centrado horizontalmente */
-
-  .avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Para que la imagen no se deforme */
-    border-radius: 50%;
-    border: 4px solid #f3f4f6; /* Borde gris claro */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  }
-
-  .btn-cambiar-foto {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #2e5c53 !important; /* Tu color verde */
-    color: white !important;
-    border: 3px solid #ffffff; /* Borde blanco para separarlo de la foto */
-  }
+  width: 150px;
+  height: 150px;
 }
 
-/* --- ESTILOS DE LA INFORMACIÓN --- */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.btn-cambiar-foto {
+  margin-top: 1.5rem !important;
+  background-color: #d8ebe0 !important;
+  color: #2e5c53 !important;
+  border-radius: 8px !important;
+  padding: 0.8rem 1.5rem !important;
+  font-weight: 600;
+}
+
+/* ===== INFORMACIÓN ===== */
+
 .info-container {
-  text-align: left;
-  margin-bottom: 2.5rem;
+  flex: 1;
+  max-width: 400px;
+}
 
-  .info-item {
-    background-color: #f3f4f6; /* Gris muy sutil */
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
+.info-item {
+  margin-bottom: 2rem;
+}
 
-    .label {
-      font-size: 0.8rem;
-      color: #6b7280;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
-      font-weight: 600;
-    }
+.label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
 
-    .valor {
-      font-size: 1.1rem;
-      color: #1f2937;
-      font-weight: 500;
-    }
+.valor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #6b7280;
+  font-size: 1rem;
+
+  mat-icon {
+    color: #9ca3af;
   }
 }
+
+/* ===== BOTÓN GUARDAR ===== */
 
 .btn-guardar {
+  margin-top: 1rem !important;
   background-color: #2e5c53 !important;
   color: white !important;
-  width: 100%;
-  height: 52px;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  border-radius: 8px !important;
+  padding: 0.9rem 2rem !important;
+  font-weight: 600;
+  min-width: 180px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .perfil-contenido {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .btn-guardar {
+    width: 100%;
+  }
+}
+.seccion-titulo {
+  margin-bottom: 2rem;
+
+  h3 {
+    font-size: 2.0rem;
+    font-weight: 450;
+    color: #2e5c53;
+    margin: 0;
+  }
+
+  .linea {
+    width: 300px;
+    height: 4px;
+    background-color: #2e8b78;
+    margin-top: 12px;
+  }
 }

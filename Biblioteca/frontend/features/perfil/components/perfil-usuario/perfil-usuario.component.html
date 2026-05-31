@@ -1,38 +1,76 @@
 <div class="perfil-pantalla">
   <div class="perfil-card">
-    
+
     <div class="perfil-header">
       <h2>Mi Perfil</h2>
-      <p>Gestiona tu información personal</p>
     </div>
 
-    <div class="avatar-container">
-      <img [src]="usuario.fotoPerfil" alt="Foto de perfil" class="avatar-img">
-      
-      <button mat-mini-fab class="btn-cambiar-foto" (click)="fileInput.click()">
-        <mat-icon>camera_alt</mat-icon>
-      </button>
+    <div class="perfil-contenido">
 
-      <input type="file" #fileInput (change)="onFotoSeleccionada($event)" accept="image/*" style="display: none;">
-    </div>
+      <!-- IZQUIERDA -->
+      <div class="avatar-section">
+<div class="seccion-titulo">
+    <h3>Información personal</h3>
+    <div class="linea"></div>
+  </div>
+        <div class="avatar-container">
+          <img
+            [src]="usuario.fotoPerfil"
+            alt="Foto de perfil"
+            class="avatar-img"
+          />
 
-    <div class="info-container">
-      
-      <div class="info-item">
-        <span class="label">Nombre completo</span>
-        <span class="valor">{{ usuario.nombre }}</span>
+          <input
+            type="file"
+            #fileInput
+            accept="image/*"
+            (change)="onFotoSeleccionada($event)"
+            hidden
+          />
+        </div>
+
+        <button
+          mat-flat-button
+          class="btn-cambiar-foto"
+          (click)="fileInput.click()"
+        >
+          Cambiar foto
+        </button>
+
       </div>
 
-      <div class="info-item">
-        <span class="label">Correo electrónico</span>
-        <span class="valor">{{ usuario.correo }}</span>
+      <!-- DERECHA -->
+      <div class="info-container">
+
+        <div class="info-item">
+          <span class="label">Nombre de usuario</span>
+
+          <div class="valor">
+            <mat-icon>person</mat-icon>
+            <span>{{ usuario.nombre }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Correo electrónico</span>
+
+          <div class="valor">
+            <mat-icon>mail</mat-icon>
+            <span>{{ usuario.correo }}</span>
+          </div>
+        </div>
+
+        <button
+          mat-flat-button
+          class="btn-guardar"
+          (click)="guardarCambios()"
+        >
+          Guardar Cambios
+        </button>
+
       </div>
 
     </div>
-
-    <button mat-flat-button class="btn-guardar" (click)="guardarCambios()">
-      Guardar Cambios
-    </button>
 
   </div>
 </div>
