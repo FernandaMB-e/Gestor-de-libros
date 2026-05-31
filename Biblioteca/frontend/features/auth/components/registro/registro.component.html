@@ -1,54 +1,130 @@
 <div class="auth-pantalla">
-  <div class="auth-card">
-    
-    <div class="auth-header">
-      <mat-icon class="icono-logo">person_add</mat-icon>
-      <h2>Crear una cuenta</h2>
-      <p>Únete para organizar tu biblioteca personal</p>
-    </div>
 
-    <form (ngSubmit)="registrar()" class="auth-form">
-      
-      <mat-form-field appearance="outline" class="campo-full-width">
-        <mat-label>Nombre completo</mat-label>
-        <mat-icon matPrefix class="icono-gris">person</mat-icon>
-        <input matInput type="text" [(ngModel)]="nombre" name="nombre" placeholder="Ej. Maria Fernanda" required>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="campo-full-width">
-        <mat-label>Correo electrónico</mat-label>
-        <mat-icon matPrefix class="icono-gris">mail</mat-icon>
-        <input matInput type="email" [(ngModel)]="correo" name="correo" placeholder="ejemplo@correo.com" required>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="campo-full-width">
-        <mat-label>Contraseña</mat-label>
-        <mat-icon matPrefix class="icono-gris">lock</mat-icon>
-        <input matInput [type]="ocultarPassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
-        <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword" type="button" class="btn-ojito">
-          <mat-icon>{{ ocultarPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="campo-full-width">
-        <mat-label>Confirmar contraseña</mat-label>
-        <mat-icon matPrefix class="icono-gris">lock_outline</mat-icon>
-        <input matInput [type]="ocultarConfirmPassword ? 'password' : 'text'" [(ngModel)]="confirmPassword" name="confirmPassword" required>
-        <button mat-icon-button matSuffix (click)="ocultarConfirmPassword = !ocultarConfirmPassword" type="button" class="btn-ojito">
-          <mat-icon>{{ ocultarConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <button mat-flat-button class="btn-entrar" type="submit" 
-              [disabled]="!nombre || !correo || !password || !confirmPassword || password !== confirmPassword">
-        Registrarse
-      </button>
-
-    </form>
-
-    <div class="auth-footer">
-      <p>¿Ya tienes una cuenta? <span class="link-accion" routerLink="/login">Inicia Sesión</span></p>
-    </div>
-
+  <div class="lado-imagen">
+    <img src="/img/registro.jpg" alt="Biblioteca">
   </div>
-</div>
+
+  <div class="lado-login">
+    <div class="auth-card">
+
+      <div class="auth-header">
+
+        <div class="logo-container">
+          <mat-icon class="icono-logo">menu_book</mat-icon>
+        </div>
+         <h2>Mi Biblioteca</h2>
+         
+        <p>Tu mundo, tus historias.</p>
+
+        <h3>Crear una cuenta</h3>
+        <p>Únete y comienza a organizar tus libros.</p>
+
+      </div>
+
+<form (ngSubmit)="registrar()" class="auth-form">
+
+  <!-- Nombre completo -->
+  <div class="grupo-campo">
+    <span class="titulo-campo">Nombre completo</span>
+
+    <mat-form-field appearance="outline" class="campo-full-width">
+      <mat-icon matPrefix class="icono-gris">person</mat-icon>
+
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="nombre"
+        name="nombre"
+        placeholder="Ej. Maria Fernanda"
+        required>
+    </mat-form-field>
+  </div>
+
+  <!-- Correo -->
+  <div class="grupo-campo">
+    <span class="titulo-campo">Correo electrónico</span>
+
+    <mat-form-field appearance="outline" class="campo-full-width">
+      <mat-icon matPrefix class="icono-gris">mail</mat-icon>
+
+      <input
+        matInput
+        type="email"
+        [(ngModel)]="correo"
+        name="correo"
+        placeholder="ejemplo@gmail.com"
+        required>
+    </mat-form-field>
+  </div>
+
+  <!-- Contraseña -->
+  <div class="grupo-campo">
+    <span class="titulo-campo">Contraseña</span>
+
+    <mat-form-field appearance="outline" class="campo-full-width">
+      <mat-icon matPrefix class="icono-gris">lock</mat-icon>
+
+      <input
+        matInput
+        [type]="ocultarPassword ? 'password' : 'text'"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Ingresa tu contraseña"
+        required>
+
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        class="btn-ojito"
+        (click)="ocultarPassword = !ocultarPassword">
+
+        <mat-icon>
+          {{ ocultarPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+
+      </button>
+    </mat-form-field>
+  </div>
+
+  <!-- Confirmar contraseña -->
+  <div class="grupo-campo">
+    <span class="titulo-campo">Confirmar contraseña</span>
+
+    <mat-form-field appearance="outline" class="campo-full-width">
+      <mat-icon matPrefix class="icono-gris">lock_outline</mat-icon>
+
+      <input
+        matInput
+        [type]="ocultarConfirmPassword ? 'password' : 'text'"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        placeholder="Repite tu contraseña"
+        required>
+
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        class="btn-ojito"
+        (click)="ocultarConfirmPassword = !ocultarConfirmPassword">
+
+        <mat-icon>
+          {{ ocultarConfirmPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+
+      </button>
+    </mat-form-field>
+  </div>
+
+  <button
+    mat-flat-button
+    class="btn-entrar"
+    type="submit"
+    [disabled]="!nombre || !correo || !password || !confirmPassword || password !== confirmPassword">
+
+    Registrarse
+
+  </button>
+
+</form>
