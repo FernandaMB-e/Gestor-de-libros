@@ -1,8 +1,10 @@
+<app-barra-principal></app-barra-principal>
+
 <main class="app-container">
   
   <div class="header-principal">
     
-    <app-barra-principal [tituloPagina]="title()"></app-barra-principal>
+    
     
     <button mat-flat-button class="btn-agregar-top" *ngIf="libros.length > 0" (click)="agregarLibroTemporal()">
       <mat-icon>add</mat-icon> Agregar libro

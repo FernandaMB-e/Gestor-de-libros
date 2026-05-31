@@ -9,9 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./saludo.component.scss']
 })
 export class HeaderSaludoComponent {
-  // Recibimos el título de la página 
-  @Input() tituloPagina: string = '';
-  
-  // Simulamos el dato dinámico del usuario
-  @Input() nombreUsuario: string = 'Maria Fernanda';
+  // Dato dinámico que recibimos del padre
+  @Input() nombreUsuario: string = 'Adrian'; 
 }
