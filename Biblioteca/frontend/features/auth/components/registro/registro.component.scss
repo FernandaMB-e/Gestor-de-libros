@@ -1,7 +1,7 @@
 .auth-pantalla {
   display: flex;
   min-height: 100vh;
-  background: #F5FBF5;
+  background: #e9f8e9;
 }
 
 /* Imagen izquierda */
@@ -17,7 +17,7 @@
   display: block;
 }
 
-/* Login derecha */
+/* Panel derecho */
 .lado-login {
   width: 72%;
   display: flex;
@@ -26,23 +26,30 @@
 }
 
 .auth-card {
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
 }
 
 /* Encabezado */
 .auth-header {
   text-align: center;
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
+}
 
-  .icono-logo {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    color: #1F6B46;
-    margin-bottom: 0.8rem;
-  }
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
-  h2 {
+.icono-logo {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #1F6B46;
+}
+
+.auth-header h2 {
   margin: 0;
   font-size: 2.2rem;
   font-family: Georgia, serif;
@@ -50,11 +57,10 @@
   color: #222;
 }
 
-  p {
-    color: #6b7280;
-    font-size: 0.95rem;
-    margin: 2;
-  }
+.auth-header p {
+  margin-top: 0.3rem;
+  color: #6B7280;
+  font-size: 0.9rem;
 }
 
 /* Formulario */
@@ -90,44 +96,50 @@
   color: #9ca3af;
 }
 
+/* Botón */
+.contenedor-boton {
+  display: flex;
+  justify-content: center;
+}
+
 .btn-entrar {
-  
+  width: 100%;
   height: 52px;
-  border-radius: 8px !important;
+
+  background-color: #078265 !important;
+  color: white !important;
+
+  border-radius: 30px !important;
+
   font-size: 1.1rem;
   font-weight: 500;
   margin-top: 1rem;
-  width: 100%;
+}
 
-  &:disabled {
-    border-radius: 30px !important;
-  background-color: #3E8F7C !important;
-  color: white !important;
-  
-  }
+.btn-entrar:active {
+  background-color: #165143 !important;
 }
 
 /* Footer */
 .auth-footer {
   text-align: center;
   margin-top: 1.5rem;
+}
 
-  p {
-    color: #6b7280;
-    font-size: 0.95rem;
-  }
+.auth-footer p {
+  color: #6B7280;
+  font-size: 0.95rem;
+}
 
-  .link-accion {
-    color: #2e5c53;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+.link-accion {
+  color: #3E8F7C;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-    &:hover {
-      color: #1f423b;
-    }
-  }
+.link-accion:hover {
+  text-decoration: underline;
 }
 
 /* Angular Material */
@@ -137,10 +149,4 @@
 
 ::ng-deep .mat-mdc-text-field-wrapper {
   border-radius: 8px !important;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
 }

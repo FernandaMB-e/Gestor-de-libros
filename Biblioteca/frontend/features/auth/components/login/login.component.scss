@@ -1,7 +1,7 @@
 .auth-pantalla {
   display: flex;
   min-height: 100vh;
-  background: #F5FBF5;
+  background: #e9f8e9;
 }
 
 /* Imagen izquierda */
@@ -103,29 +103,24 @@
   color: #9CA3AF;
 }
 
-/* Botón */
-.contenedor-boton {
-  display: flex;
-  justify-content: center;
-}
-
 .btn-entrar {
-  width: 280px;
-  height: 50px;
-  margin-top: 1rem;
+  width: 100%;
+  height: 52px;
+
+  background-color: #078265 !important;
+  color: white !important;
 
   border-radius: 30px !important;
-  background-color: #3E8F7C !important;
-  color: white !important;
 
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
+  margin-top: 1rem;
 }
 
-.btn-entrar:disabled {
-  background-color: #A7CFC3 !important;
-  color: white !important;
+.btn-entrar:active {
+  background-color: #165143 !important;
 }
+
 
 /* Footer */
 .auth-footer {
