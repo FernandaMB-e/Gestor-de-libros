@@ -24,8 +24,8 @@ import { HeaderSaludoComponent } from '../biblioteca/components/barra-principal/
     ResumenEstadisticasComponent, 
     HeaderSaludoComponent
   ],
-  templateUrl: './vista-principal.component.html', // 3. CAMBIO: Apunta a su propio HTML
-  styleUrl: './vista-principal.component.scss'     // 4. CAMBIO: Apunta a su propio SCSS
+  templateUrl: './vista-principal.html', // 3. CAMBIO: Apunta a su propio HTML
+  styleUrl: './vista-principal.scss'     // 4. CAMBIO: Apunta a su propio SCSS
 })
 export class VistaPrincipalComponent { // 5. CAMBIO: Ya no se llama App, se llama VistaPrincipalComponent
   protected readonly title = signal('Biblioteca');

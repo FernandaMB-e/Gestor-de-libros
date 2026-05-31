@@ -1,0 +1,38 @@
+<div class="perfil-pantalla">
+  <div class="perfil-card">
+    
+    <div class="perfil-header">
+      <h2>Mi Perfil</h2>
+      <p>Gestiona tu información personal</p>
+    </div>
+
+    <div class="avatar-container">
+      <img [src]="usuario.fotoPerfil" alt="Foto de perfil" class="avatar-img">
+      
+      <button mat-mini-fab class="btn-cambiar-foto" (click)="fileInput.click()">
+        <mat-icon>camera_alt</mat-icon>
+      </button>
+
+      <input type="file" #fileInput (change)="onFotoSeleccionada($event)" accept="image/*" style="display: none;">
+    </div>
+
+    <div class="info-container">
+      
+      <div class="info-item">
+        <span class="label">Nombre completo</span>
+        <span class="valor">{{ usuario.nombre }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Correo electrónico</span>
+        <span class="valor">{{ usuario.correo }}</span>
+      </div>
+
+    </div>
+
+    <button mat-flat-button class="btn-guardar" (click)="guardarCambios()">
+      Guardar Cambios
+    </button>
+
+  </div>
+</div>
