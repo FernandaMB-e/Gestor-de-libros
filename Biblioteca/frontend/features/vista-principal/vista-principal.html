@@ -1,12 +1,31 @@
+<div class="header-principal">
+  
+  <div class="logo-contenedor">
+    <img src="/img/icono-biblioteca.jpg" alt="Logo" class="logo-img">
+    <h1 class="logo-biblioteca">Biblioteca</h1>
+  </div>
+
+  <div class="acciones-usuario">
+    
+    <button mat-icon-button (click)="irAPerfil()" matTooltip="Ver perfil" class="btn-perfil">
+       <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <button mat-button (click)="cerrarSesion()" class="btn-logout">
+       <mat-icon>exit_to_app</mat-icon> Cerrar sesión
+    </button>
+
+   
+
+  </div>
+</div>
+
 <app-barra-principal></app-barra-principal>
 
 <main class="app-container">
   
-  <div class="header-principal">
-    
-    
-    
-    <button mat-flat-button class="btn-agregar-top" *ngIf="libros.length > 0" (click)="agregarLibroTemporal()">
+  <div class="contenedor-acciones-top" *ngIf="libros.length > 0">
+    <button mat-flat-button class="btn-agregar-top" (click)="agregarLibroTemporal()">
       <mat-icon>add</mat-icon> Agregar libro
     </button>
   </div>

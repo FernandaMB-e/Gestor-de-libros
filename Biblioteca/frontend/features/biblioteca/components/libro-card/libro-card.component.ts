@@ -23,11 +23,11 @@ export class LibroCardComponent {
   // Recibe la información del libro desde el componente padre
   // Le ponemos datos por defecto para que puedas ver el diseño de inmediato
   @Input() libro: Libro = {
-    titulo: 'El Nombre del Viento',
-    autor: 'Patrick Rothfuss',
-    portada: 'https://m.media-amazon.com/images/I/91b8oNwaV1L.jpg', // Imagen de prueba
-    puntuacion: 4,
-    estado: 'Leyendo',
+    titulo: 'Fuego y Sangre', 
+    autor: 'George R.R. Martin',
+    portada: '/img/Portada.jpg', 
+    puntuacion: 5,
+    estado: 'Leídos',
     favorito: true
   };
 
