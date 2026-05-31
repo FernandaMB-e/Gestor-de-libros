@@ -9,11 +9,12 @@ import { BuscadorFiltrosComponent, FiltrosBusqueda } from '../../frontend/featur
 import { LibroCardComponent, Libro } from '../../frontend/features/biblioteca/components/libro-card/libro-card.component';
 // Importamos también la interfaz de la información general
 import { ResumenEstadisticasComponent } from '../../frontend/features/biblioteca/components/resumen-estadisticas/resumen-estadisticas.component';
-
+//Importamos la barra superior 
+import { HeaderSaludoComponent } from '../../frontend/features/biblioteca/components/barra-principal/saludo.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatButtonModule, MatIconModule, BuscadorFiltrosComponent, LibroCardComponent, ResumenEstadisticasComponent],
+  imports: [CommonModule, RouterOutlet, MatButtonModule, MatIconModule, BuscadorFiltrosComponent, LibroCardComponent, ResumenEstadisticasComponent, HeaderSaludoComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
