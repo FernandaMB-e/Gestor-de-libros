@@ -3,17 +3,20 @@ export type EstadoLectura = 'Leyendo' | 'Leídos' | 'Pendientes por leer';
 
 //modelo del libro que devuelve el backend
 export interface Libro {
-  id: number;
+  id?: number;
   titulo: string;
   autor: string;
-  anioPublicacion: number;
+  anio: number;
   genero: string;
-  portada: string; 
-  estadoLectura: EstadoLectura | string;
-  tiempoLectura: string; 
-  calificacion: number; 
-  resenia: string;
-  favorito: boolean; 
+  portada?: string;
+  estadoLectura: string;
+  tiempoLectura?: string;
+  disponible: boolean;
+  prestadoA?: string;
+  fechaPrestamo?: string;
+  favorito: boolean;
+  calificacion: number;
+  resena?: string;
 }
 
 //modelo de entrada para crear un nuevo libro

@@ -94,6 +94,10 @@ export class VistaPrincipalComponent {
     });
   }
 
+  irAgregarLibro() {
+    this.router.navigate(['/agregar-libro']);
+  }
+
   constructor(private router: Router) {}
 
   irAPerfil() {

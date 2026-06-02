@@ -25,7 +25,7 @@
 <main class="app-container">
   
   <div class="contenedor-acciones-top" *ngIf="libros.length > 0">
-    <button mat-flat-button class="btn-agregar-top" (click)="agregarLibroTemporal()">
+    <button mat-flat-button class="btn-agregar-top" (click)="irAgregarLibro()">
       <mat-icon>add</mat-icon> Agregar libro
     </button>
   </div>
@@ -39,7 +39,7 @@
     <h2>No tienes ningún libro por el momento</h2>
     <p>Puedes comenzar a agregar libros pulsando el siguiente botón</p>
     
-    <button mat-flat-button class="btn-agregar-center" (click)="agregarLibroTemporal()">
+    <button mat-flat-button class="btn-agregar-center" (click)="irAgregarLibro()">
       Agregar libro
     </button>
   </div>
