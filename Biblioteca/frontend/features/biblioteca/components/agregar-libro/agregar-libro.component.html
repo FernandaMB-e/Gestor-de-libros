@@ -38,6 +38,10 @@
       <input type="number" placeholder="Ej. 2024" [(ngModel)]="anio">
       <small class="error" *ngIf="mostrarErrores && (!anio || anio <= 0)"> El año debe ser mayor que 0 </small>
 
+      <label>Total de páginas</label>
+      <input type="number" placeholder="Ej. 350" [(ngModel)]="totalPaginas">
+      <small class="error" *ngIf="mostrarErrores && (!totalPaginas || totalPaginas <= 0)"> El total de páginas es obligatorio </small>
+
       <label>Género</label>
       <select>
         <option>Ciencia ficción</option>
@@ -97,9 +101,32 @@
       <label>Estado de lectura</label>
 
       <div class="radios">
-        <label><input type="radio" name="estado"> Leyendo</label>
-        <label><input type="radio" name="estado"> Leído</label>
-        <label><input type="radio" name="estado"> Pendiente por leer</label>
+        <label>
+            <input
+            type="radio"
+            name="estado"
+            [checked]="!estadoLeido"
+            (change)="estadoLeido = false">
+            Leyendo
+        </label>
+
+        <label>
+            <input
+            type="radio"
+            name="estado"
+            [checked]="estadoLeido"
+            (change)="estadoLeido = true">
+            Leído
+        </label>
+
+        <label>
+            <input
+            type="radio"
+            name="estado"
+            [checked]="!estadoLeido"
+            (change)="estadoLeido = false">
+            Pendiente por leer
+        </label>
       </div>
 
       <p class="texto-ayuda">
@@ -107,9 +134,7 @@
       </p>
 
       <label>Tiempo de lectura</label>
-      <input type="text" placeholder="Ej. 5 días, 2 semanas, 1 mes">
-
-      <label>Estado de disposición</label>
+      <input type="text" placeholder="Ej. 5 días, 2 semanas, 1 mes" [disabled]="!estadoLeido">
 
       <label>Estado de disposición</label>
 
@@ -160,8 +185,7 @@
 
       <textarea
         rows="4"
-        placeholder="Escribe tu reseña o comentario sobre el libro...">
-      </textarea>
+        placeholder="Escribe tu reseña o comentario sobre el libro..."></textarea>
 
       <div class="botones">
 

@@ -7,6 +7,7 @@ export interface Libro {
   titulo: string;
   autor: string;
   anio: number;
+  totalPaginas: number;
   genero: string;
   portada?: string;
   estadoLectura: string;
@@ -24,6 +25,7 @@ export interface LibroCreate {
   titulo: string;
   autor: string;
   anioPublicacion: number;
+  totalPaginas: number;
   genero: string;
   portada: File | null; 
   estadoLectura: EstadoLectura | string;
