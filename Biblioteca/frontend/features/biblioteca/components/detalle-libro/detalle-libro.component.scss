@@ -1,0 +1,128 @@
+.detalle-container{
+  background:#edf7ef;
+  padding:40px;
+  min-height:100vh;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:40px;
+}
+
+.btn-volver{
+  border:none;
+  background:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.acciones{
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+
+.favorito{
+  font-size:28px;
+}
+
+.corazon{
+  cursor: default;
+}
+
+.corazon mat-icon{
+  color:#ef4444;
+  font-size:30px;
+  width:30px;
+  height:30px;
+}
+
+.btn-editar{
+  background:#d9f0d2;
+  border:1px solid #98c98d;
+  padding:8px 15px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.btn-eliminar{
+  background:#f5d9d9;
+  border:1px solid #d8aaaa;
+  padding:8px 15px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.contenido {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.portada {
+  width: 280px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.autor{
+  margin-top:-10px;
+}
+
+.estado{
+  background:#f0ab2f;
+  color:white;
+  padding:5px 12px;
+  border-radius:6px;
+  display:inline-block;
+}
+
+.estrellas{
+  color:#f5b400;
+  font-size:24px;
+  margin:15px 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  row-gap: 14px;
+  column-gap: 24px;
+}
+
+.columna-resena{
+  font-size:14px;
+  line-height:1.4;
+}
+
+.estrellas {
+  display: flex;
+  gap: 4px;
+  font-size: 28px;
+}
+
+.estrellas span {
+  color: #d6d6d6;
+}
+
+.estrellas span.activa {
+  color: #f5b301;
+}
+
+.columna-resena {
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.columna-info h2 {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+.autor {
+  font-size: 20px;
+  color: #4f4f4f;
+}

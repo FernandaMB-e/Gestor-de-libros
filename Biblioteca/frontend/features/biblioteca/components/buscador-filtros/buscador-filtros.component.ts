@@ -8,11 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 
-import { EstadoLectura } from '../../models/libro.model';
-
 export interface FiltrosBusqueda {
   texto: string;
-  estado: EstadoLectura | null;
+  estado: string | null;
   disposicion: 'Disponible' | 'Prestado' | null;
   puntuacion: number | null; // Estrellas
   favoritos: boolean; // Botón de filtro
@@ -33,7 +31,7 @@ export class BuscadorFiltrosComponent {
   @Output() vistaCambio = new EventEmitter<'lista' | 'cuadricula'>();
 
   textoBusqueda = '';
-  estadoSeleccionado: EstadoLectura | null = null;
+  estadoSeleccionado: string | null = null;
   disposicionSeleccionada: 'Disponible' | 'Prestado' | null = null;
   puntuacionSeleccionada: number | null = null; // Estrellas
   favoritos: boolean = false; // Estado del botón

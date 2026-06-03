@@ -1,0 +1,106 @@
+<div class="detalle-container">
+
+  <div class="header">
+
+    <button
+        class="btn-volver"
+        (click)="volver()">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+    </button>
+
+    <div class="acciones">
+
+      <div class="corazon">
+        <mat-icon>favorite</mat-icon>
+    </div>
+
+      <button class="btn-editar">
+        ✏ Editar
+      </button>
+
+      <button class="btn-eliminar">
+        🗑 Eliminar
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="contenido">
+
+    <div class="columna-portada">
+
+      <img [src]="libro.portada" [alt]="libro.titulo" class="portada">
+
+    </div>
+
+    <div class="columna-info">
+
+      <h2>{{ libro.titulo }}</h2>
+
+      <p class="autor">{{ libro.autor }}</p>
+
+      <span class="estado">{{ libro.estadoLectura }}</span>
+
+      <div class="estrellas">
+        <span
+            *ngFor="let estrella of estrellas"
+            [class.activa]="estrella <= libro.calificacion">
+            ★
+        </span>
+    </div>
+
+      <h3>Información</h3>
+
+      <div class="info-grid">
+
+        <span>Año de publicación:</span>
+        <span>{{ libro.anio }}</span>
+
+        <span>Páginas:</span>
+        <span>{{ libro.totalPaginas }} </span>
+
+        <span>Género:</span>
+        <span>{{ libro.genero }}</span>
+
+        <span>Estado de lectura:</span>
+        <span>{{ libro.estadoLectura }}</span>
+
+        <span>Tiempo de lectura:</span>
+        <span>
+            {{ libro.tiempoLectura || 'Sin terminar' }}
+        </span>
+
+        <span>Estado de disposición:</span>
+        <span>
+            <b>
+                {{ libro.disponible ? 'Disponible' : 'Prestado' }}
+            </b>
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="columna-resena">
+
+      <h4>Reseña:</h4>
+        <p>
+        {{ libro.resena || 'Sin reseña' }}
+        </p>
+
+      <h4>Prestado a:</h4>
+        <p *ngIf="libro.disponible">
+        No está prestado
+        </p>
+
+        <p *ngIf="!libro.disponible">
+        {{ libro.prestadoA }}
+        </p>
+
+    </div>
+
+  </div>
+
+</div>

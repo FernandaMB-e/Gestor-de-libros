@@ -6,9 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 //Rutas 
 import { BuscadorFiltrosComponent, FiltrosBusqueda } from '../biblioteca/components/buscador-filtros/buscador-filtros.component';
-import { LibroCardComponent, Libro } from '../biblioteca/components/libro-card/libro-card.component';
+import { LibroCardComponent } from '../biblioteca/components/libro-card/libro-card.component'; // Componente para mostrar cada libro en formato tarjeta
+import { Libro } from '../biblioteca/models/libro.model'; // Modelo de libro para definir la estructura de los datos de cada libro, se separo porque había un error
 import { ResumenEstadisticasComponent } from '../biblioteca/components/resumen-estadisticas/resumen-estadisticas.component';
 import { HeaderSaludoComponent } from '../biblioteca/components/barra-principal/saludo.component'; 
+import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
 
 @Component({
   selector: 'app-vista-principal', 
@@ -30,8 +32,16 @@ export class VistaPrincipalComponent {
   protected readonly title = signal('Biblioteca');
   tituloSeccion = 'Mis libros';
 
-  libros: Libro[] = [];
+  constructor( // Inyectamos el Router para poder navegar entre pantallas, y el BibliotecaService para obtener la lista de libros (aún no implementado)
+    private router: Router,
+    private bibliotecaService: BibliotecaService
+  ) {}
 
+  libros: Libro[] = [ ];// Libro de ejemplo para mostrar en la vista principal  
+
+  ngOnInit() {
+    this.libros = this.bibliotecaService.obtenerLibros();
+  }
   // Memoria para recordar qué filtros estaban activos antes del nuevo clic
   filtrosAnteriores: FiltrosBusqueda = {
     texto: '',
@@ -83,22 +93,13 @@ export class VistaPrincipalComponent {
     this.filtrosAnteriores = { ...filtros };
   }
 
-  agregarLibroTemporal() {
-    this.libros.push({
-      titulo: 'Fuego y Sangre',
-      autor: 'George R. R. Martin',
-      portada: '/img/Portada.jpg',
-      puntuacion: 5,
-      estado: 'Pendientes por leer',
-      favorito: true
-    });
+  agregarLibroTemporal() { // Método temporal para probar la navegación a la pantalla de agregar libro, se puede eliminar después
+    this.router.navigate(['/agregar-libro']);
   }
 
   irAgregarLibro() {
     this.router.navigate(['/agregar-libro']);
   }
-
-  constructor(private router: Router) {}
 
   irAPerfil() {
   this.router.navigate(['/perfil']);

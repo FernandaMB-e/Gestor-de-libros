@@ -6,6 +6,7 @@ import { RegistroComponent } from '../../frontend/features/auth/components/regis
 import { PerfilUsuarioComponent } from '../../frontend/features/perfil/components/perfil-usuario/perfil-usuario.component';
 import { VistaPrincipalComponent } from '../../frontend/features/vista-principal/vista-principal';
 import { AgregarLibroComponent } from '../../frontend/features/biblioteca/components/agregar-libro/agregar-libro.component';
+import { DetalleLibroComponent } from '../../frontend/features/biblioteca/components/detalle-libro/detalle-libro.component';
 
 export const routes: Routes = [
   // Si el usuario entra a la raíz de la página, lo mandamos al login
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'biblioteca', component: VistaPrincipalComponent },
   { path: 'perfil', component: PerfilUsuarioComponent },
   { path: 'agregar-libro', component: AgregarLibroComponent },
+  { path: 'detalle-libro', component: DetalleLibroComponent },
 
   // Si escriben una URL que no existe, los mandamos al login por seguridad
   { path: '**', redirectTo: 'login' }

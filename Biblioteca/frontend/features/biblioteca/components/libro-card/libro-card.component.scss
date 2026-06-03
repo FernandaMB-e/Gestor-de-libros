@@ -32,7 +32,7 @@
   }
 
   /* Estilos compartidos para los botones flotantes */
-  .btn-esquina, .btn-favorito {
+  .btn-favorito {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.85); /* Blanco semi-transparente */
     backdrop-filter: blur(4px); /* Efecto cristal */
@@ -42,10 +42,23 @@
     &:hover { background-color: rgba(255, 255, 255, 1); }
   }
 
-  .btn-esquina {
-    top: 8px;
-    right: 8px;
-    color: #4b5563; /* Gris oscuro */
+  .btn-esquina{
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    z-index: 10;
+  }
+
+  .btn-esquina mat-icon{
+    color: #555;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
   }
 
   .btn-favorito {

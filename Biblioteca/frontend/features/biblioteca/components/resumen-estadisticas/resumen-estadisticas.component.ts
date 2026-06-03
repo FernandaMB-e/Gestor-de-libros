@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 // Importamos la interfaz Libro para poder usarla en el tipo del @input
-import { Libro } from '../libro-card/libro-card.component'; 
+import { Libro } from '../../models/libro.model';
 
 @Component({
   selector: 'app-resumen-estadisticas',
@@ -24,29 +24,39 @@ export class ResumenEstadisticasComponent {
     return this.libros.length;
   }
 
-  get leyendo(): number {
-    return this.libros.filter(libro => libro.estado === 'Leyendo').length;
-  }
+get leyendo(): number {
+  return this.libros.filter(
+    libro => libro.estadoLectura === 'Leyendo'
+  ).length;
+}
 
-  get leidos(): number {
-    return this.libros.filter(libro => libro.estado === 'Leídos').length;
-  }
+get leidos(): number {
+  return this.libros.filter(
+    libro => libro.estadoLectura === 'Leído'
+  ).length;
+}
 
-  get pendientes(): number {
-    return this.libros.filter(libro => libro.estado === 'Pendientes por leer').length;
-  }
+get pendientes(): number {
+  return this.libros.filter(
+    libro => libro.estadoLectura === 'Pendiente por leer'
+  ).length;
+}
 
-  get favoritos(): number {
-    return this.libros.filter(libro => libro.favorito === true).length;
-  }
+get favoritos(): number {
+  return this.libros.filter(
+    libro => libro.favorito
+  ).length;
+}
 
-  
-  get prestados(): number {
-    
-    return this.libros.filter(libro => (libro as any).disposicion === 'Prestado').length;
-  }
+get prestados(): number {
+  return this.libros.filter(
+    libro => !libro.disponible
+  ).length;
+}
 
-  get disponibles(): number {
-    return this.libros.filter(libro => (libro as any).disposicion === 'Disponible').length;
-  }
+get disponibles(): number {
+  return this.libros.filter(
+    libro => libro.disponible
+  ).length;
+}
 }

@@ -3,8 +3,8 @@
   <div class="portada-wrapper">
     <img [src]="libro.portada" [alt]="libro.titulo" class="portada-img">
 
-    <button mat-icon-button class="btn-esquina" title="Ver detalles">
-      <mat-icon>open_in_new</mat-icon> 
+    <button mat-icon-button class="btn-esquina" title="Ver detalles" (click)="verDetalles()">
+      <mat-icon>menu</mat-icon>
     </button>
 
     <button mat-icon-button class="btn-favorito" (click)="toggleFavorito()">
@@ -21,14 +21,15 @@
 
     <div class="puntuacion">
       <mat-icon *ngFor="let estrella of estrellas"
-                [class.star-gold]="libro.puntuacion >= estrella"
-                [class.star-gray]="libro.puntuacion < estrella">
+          [class.star-gold]="libro.calificacion >= estrella"
+          [class.star-gray]="libro.calificacion < estrella">
         star
       </mat-icon>
     </div>
 
-    <div class="estado-badge" [ngClass]="obtenerClaseEstado(libro.estado)">
-      {{ libro.estado }}
+    <div class="estado-badge"
+     [ngClass]="obtenerClaseEstado(libro.estadoLectura)">
+      {{ libro.estadoLectura }}
     </div>
 
   </div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router'; // sireve para navegar entre pantallas
 import { CommonModule } from '@angular/common'; // CommonModule para usar directivas como ngIf y ngFor que sirven para mostrar u ocultar elementos en el HTML según ciertas condiciones, o para iterar sobre listas de datos y mostrarlos dinámicamente en la interfaz
 import { FormsModule } from '@angular/forms'; // FormsModule para usar ngModel en el formulario que sirve para enlazar los campos del formulario con las propiedades del componente, lo que facilita la captura de los datos ingresados por el usuario y su uso en el código TypeScript
 import { Libro } from '../../models/libro.model'; // Importación del modelo de libro para usarlo en la creación del nuevo libro
+import { BibliotecaService } from '../../services/biblioteca.service'; // Importación del servicio de biblioteca para agregar el nuevo libro a la lista de libros (aún no implementado)
 
 @Component({
   selector: 'app-agregar-libro',
@@ -13,7 +14,10 @@ import { Libro } from '../../models/libro.model'; // Importación del modelo de 
   styleUrl: './agregar-libro.component.scss'
 })
 export class AgregarLibroComponent {
-    constructor(private router: Router){}
+    constructor( // Inyectamos el Router para poder navegar entre pantallas, y el BibliotecaService para agregar el nuevo libro a la lista de libros (aún no implementado)
+        private router: Router,
+        private bibliotecaService: BibliotecaService
+    ){}
 
     volver(){ //para volver a la vista principal sin guardar el libro
     this.router.navigate(['/biblioteca']);
@@ -98,8 +102,9 @@ export class AgregarLibroComponent {
             calificacion: this.calificacion,
             resena: ''
         };
-        console.log(nuevoLibro); // Imprime el nuevo libro en la consola para verificar que se creó correctamente
-        alert('Libro listo para guardarse');
+        this.bibliotecaService.agregarLibro(nuevoLibro); //aquí se llamaría al método del servicio para agregar el nuevo libro a la lista de libros (aún no implementado)
+        alert('Libro guardado correctamente');
+        this.router.navigate(['/biblioteca']); //después de guardar el libro, se navega de vuelta a la vista principal para mostrar el nuevo libro en la lista (aún no implementado)
     }
 
     estadoLeido = false;

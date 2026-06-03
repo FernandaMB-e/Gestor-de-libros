@@ -2,15 +2,9 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
-export interface Libro {
-  titulo: string;
-  autor: string;
-  portada: string;
-  puntuacion: number;
-  estado: 'Leyendo' | 'Leídos' | 'Pendientes por leer';
-  favorito: boolean;
-}
+import { Router } from '@angular/router';
+import { Libro } from '../../models/libro.model';
+import { BibliotecaService } from '../../services/biblioteca.service';
 
 @Component({
   selector: 'app-libro-card',
@@ -22,13 +16,18 @@ export interface Libro {
 export class LibroCardComponent {
   // Recibe la información del libro desde el componente padre
   // Le ponemos datos por defecto para que puedas ver el diseño de inmediato
-  @Input() libro: Libro = {
-    titulo: 'Fuego y Sangre', 
+ @Input() libro: Libro = {
+    titulo: 'Fuego y Sangre',
     autor: 'George R.R. Martin',
-    portada: '/img/Portada.jpg', 
-    puntuacion: 5,
-    estado: 'Leídos',
-    favorito: true
+    anio: 2022,
+    totalPaginas: 700,
+    genero: 'Fantasía',
+    portada: '/img/Portada.jpg',
+    estadoLectura: 'Leído',
+    disponible: true,
+    favorito: true,
+    calificacion: 5,
+    resena: ''
   };
 
   // Arreglo auxiliar para poder dibujar exactamente 5 estrellas
@@ -37,6 +36,11 @@ export class LibroCardComponent {
   // Alternar el estado del corazón
   toggleFavorito() {
     this.libro.favorito = !this.libro.favorito;
+  }
+
+  verDetalles() {
+    this.bibliotecaService.libroSeleccionado = this.libro;
+    this.router.navigate(['/detalle-libro']);
   }
 
   // Asigna un color diferente dependiendo del estado
@@ -48,4 +52,9 @@ export class LibroCardComponent {
       default: return 'badge-default';
     }
   }
+
+  constructor( // Inyectamos el Router para poder navegar entre pantallas, y el BibliotecaService para obtener la información del libro seleccionado (aún no implementado)
+    private router: Router,
+    private bibliotecaService: BibliotecaService
+  ) {}
 }
