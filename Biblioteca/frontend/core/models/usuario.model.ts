@@ -4,7 +4,7 @@ export interface Usuario {
   id: number;
   nombre: string;
   correo: string;
-  fotoPerfil: string; // Ruta o URL de la imagen (ej. 'assets/img/avatar.png')
+  fotoPerfil: string; 
 }
 
 // 2. Modelo de entrada para crear/registrar un nuevo usuario
@@ -16,7 +16,7 @@ export interface UsuarioCreate {
   fotoPerfil?: File | null; // Archivo físico por si deciden subir foto al registrarse (opcional)
 }
 
-// 3. (Opcional pero recomendado) Modelo para el Login
+// 3.Modelo para el Login
 // Solo necesitamos las credenciales exactas para iniciar sesión
 export interface UsuarioLogin {
   correo: string;
