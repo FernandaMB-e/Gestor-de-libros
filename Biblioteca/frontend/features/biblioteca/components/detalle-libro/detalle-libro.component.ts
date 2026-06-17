@@ -72,4 +72,14 @@ export class DetalleLibroComponent {
         });
     }
 
+    editarLibro() {
+
+      this.bibliotecaService.libroSeleccionado =
+        this.libro;
+
+      this.bibliotecaService.modoEdicion = true;
+
+      this.router.navigate(['/agregar-libro']);
+    }
+
 }

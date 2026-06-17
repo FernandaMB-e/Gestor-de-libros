@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'; //define el archivo como un componente de Angular, lo que permite usarlo en la aplicación y definir su comportamiento e interfaz
-import { MatIconModule } from '@angular/material/icon'; // MatIconModule para usar los íconos de Material Design, como el corazón
-import { Router } from '@angular/router'; // sireve para navegar entre pantallas
-import { CommonModule } from '@angular/common'; // CommonModule para usar directivas como ngIf y ngFor que sirven para mostrar u ocultar elementos en el HTML según ciertas condiciones, o para iterar sobre listas de datos y mostrarlos dinámicamente en la interfaz
-import { FormsModule } from '@angular/forms'; // FormsModule para usar ngModel en el formulario que sirve para enlazar los campos del formulario con las propiedades del componente, lo que facilita la captura de los datos ingresados por el usuario y su uso en el código TypeScript
-import { Libro } from '../../models/libro.model'; // Importación del modelo de libro para usarlo en la creación del nuevo libro
-import { BibliotecaService } from '../../services/biblioteca.service'; // Importación del servicio de biblioteca para agregar el nuevo libro a la lista de libros (aún no implementado)
+import { Component } from '@angular/core'; 
+import { MatIconModule } from '@angular/material/icon'; 
+import { Router } from '@angular/router'; 
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms'; 
+import { Libro } from '../../models/libro.model'; 
+import { BibliotecaService } from '../../services/biblioteca.service'; 
 
 @Component({
   selector: 'app-agregar-libro',
@@ -14,56 +14,83 @@ import { BibliotecaService } from '../../services/biblioteca.service'; // Import
   styleUrl: './agregar-libro.component.scss'
 })
 export class AgregarLibroComponent {
-    constructor( // Inyectamos el Router para poder navegar entre pantallas, y el BibliotecaService para agregar el nuevo libro a la lista de libros (aún no implementado)
+    constructor( 
         private router: Router,
         private bibliotecaService: BibliotecaService
     ){}
 
-    volver(){ //para volver a la vista principal sin guardar el libro
+    ngOnInit() {
+        if (
+            this.bibliotecaService.modoEdicion &&
+            this.bibliotecaService.libroSeleccionado
+        ) {
+
+            const libro =
+                this.bibliotecaService.libroSeleccionado;
+
+            this.modoEdicion = true;
+
+            this.idLibroEditar = libro._id || '';
+
+            this.titulo = libro.titulo;
+            this.autor = libro.autor;
+            this.anio = libro.anio;
+            this.totalPaginas = libro.totalPaginas;
+
+            this.esFavorito = libro.favorito;
+
+            this.calificacion = libro.calificacion;
+
+            this.imagenPreview = libro.portada;
+        }
+    }
+
+    volver(){ 
     this.router.navigate(['/biblioteca']);
     }
 
-    esFavorito = false; //para controlar si el libro es marcado como favorito o no, y mostrar el ícono del corazon lleno o vacío
+    esFavorito = false; 
     toggleFavorito() {
     this.esFavorito = !this.esFavorito;
     }
 
-    calificacion = 0; //para almacenar la calificación del libro ingresada por el usuario
+    calificacion = 0; 
     calificar(valor:number){
     this.calificacion = valor;
     }
 
-    onImagenSeleccionada(event: Event) { //método para manejar la selección de la imagen de portada del libro
+    onImagenSeleccionada(event: Event) { 
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) {
         return;
     }
 
-    const archivo = input.files[0]; // Obtenemos el archivo seleccionado
-    const reader = new FileReader(); // Creamos un FileReader para leer el archivo
+    const archivo = input.files[0]; 
+    const reader = new FileReader(); 
 
-    reader.onload = () => { //para mostrar la imagen seleccionada como preview antes de guardarla
+    reader.onload = () => { 
         this.imagenPreview = reader.result;
     };
 
-    reader.readAsDataURL(archivo); //para convertir la imagen a base64 y mostrarla como preview
+    reader.readAsDataURL(archivo); 
     }
 
-    prestado = false; //para controlar si el libro está prestado o no, y mostrar el campo de "prestado a" solo cuando sea necesario
+    prestado = false; 
 
-    imagenPreview: string | ArrayBuffer | null = null; // Para mostrar la imagen seleccionada antes de guardarla
-
-    cancelar() { //para volver a la vista principal sin guardar el libro
+    imagenPreview: string | ArrayBuffer | null = null; 
+    cancelar() { 
     this.router.navigate(['/biblioteca']);
     }
 
-    titulo = ''; //para almacenar el título del libro ingresado por el usuario
+    titulo = ''; 
     autor = '';
     anio: number | null = null;
     totalPaginas: number | null = null;
     mostrarErrores = false;
+    modoEdicion = false;
+    idLibroEditar = '';
 
-    validarFormulario(): boolean { //para validar que los campos obligatorios estén completos antes de guardar el libro
+    validarFormulario(): boolean {
         this.mostrarErrores = true;
         if (!this.titulo.trim()) {
             return false;
@@ -84,12 +111,12 @@ export class AgregarLibroComponent {
         return true;
     }
 
-    guardarLibro() { //método provicional sin backend
+    guardarLibro() {
         if (!this.validarFormulario()) {
             return;
         }
 
-        const nuevoLibro: Libro = { //crea un nuevo libro con los datos ingresados por el usuario, usando el modelo de libro importado
+        const libro: Libro = {
             titulo: this.titulo,
             autor: this.autor,
             anio: this.anio!,
@@ -102,23 +129,68 @@ export class AgregarLibroComponent {
             calificacion: this.calificacion,
             resena: ''
         };
-       this.bibliotecaService.agregarLibro(nuevoLibro)
-        .subscribe({
-        next: () => {
-            alert('Libro guardado correctamente');
-            this.router.navigate(['/biblioteca']);
-        },
 
-        error: (error) => {
-            console.error(error);
-            alert('Error al guardar el libro');
+        if (this.modoEdicion) {
+            this.bibliotecaService
+                .actualizarLibro(
+                    this.idLibroEditar,
+                    libro
+                )
+                .subscribe({
+
+                    next: () => {
+
+                        alert(
+                            'Libro actualizado correctamente'
+                        );
+
+                        this.bibliotecaService
+                            .modoEdicion = false;
+
+                        this.router.navigate([
+                            '/biblioteca'
+                        ]);
+                    },
+
+                    error: (error) => {
+
+                        console.error(error);
+
+                        alert(
+                            'Error al actualizar el libro'
+                        );
+                    }
+                });
+
+            return;
         }
-        });
-            }
 
-            estadoLeido = false;
+        this.bibliotecaService
+            .agregarLibro(libro)
+            .subscribe({
 
-        }
+                next: () => {
 
+                    alert(
+                        'Libro guardado correctamente'
+                    );
 
+                    this.router.navigate([
+                        '/biblioteca'
+                    ]);
+                },
 
+                error: (error) => {
+
+                    console.error(error);
+
+                    alert(
+                        'Error al guardar el libro'
+                    );
+                }
+            });
+    }
+
+    estadoLeido = false;
+
+}

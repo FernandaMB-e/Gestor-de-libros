@@ -31,3 +31,15 @@ def eliminar_libro(id):
         return {"mensaje": "Libro eliminado correctamente"}
 
     return {"mensaje": "Libro no encontrado"}
+
+def actualizar_libro(id, libro):
+
+    resultado = libros_collection.update_one(
+        {"_id": ObjectId(id)},
+        {"$set": libro}
+    )
+
+    if resultado.modified_count == 1:
+        return {"mensaje": "Libro actualizado correctamente"}
+
+    return {"mensaje": "No se realizaron cambios"}

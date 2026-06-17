@@ -10,7 +10,8 @@ from app.models.libro_model import Libro
 from app.controllers.libros_controller import (
     listar_libros,
     crear_libro,
-    borrar_libro
+    borrar_libro,
+    editar_libro
 )
 
 router = APIRouter()
@@ -30,3 +31,8 @@ def post_libro(libro: Libro):
 def delete_libro(id: str):
 
     return borrar_libro(id)
+
+@router.put("/libros/{id}")
+def put_libro(id: str, libro: Libro):
+
+    return editar_libro(id, libro)

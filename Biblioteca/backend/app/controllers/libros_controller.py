@@ -6,6 +6,12 @@ from app.services.libros_service import (
 
 from app.models.libro_model import Libro
 
+from app.services.libros_service import (
+    obtener_libros,
+    guardar_libro,
+    eliminar_libro,
+    actualizar_libro
+)
 
 def listar_libros():
 
@@ -19,3 +25,10 @@ def crear_libro(libro: Libro):
 def borrar_libro(id):
 
     return eliminar_libro(id)
+
+def editar_libro(id, libro: Libro):
+
+    return actualizar_libro(
+        id,
+        libro.model_dump()
+    )
