@@ -39,9 +39,24 @@ export class VistaPrincipalComponent {
 
   libros: Libro[] = [ ];// Libro de ejemplo para mostrar en la vista principal  
 
-  ngOnInit() {
-    this.libros = this.bibliotecaService.obtenerLibros();
-  }
+ngOnInit() {
+
+  this.bibliotecaService.obtenerLibros()
+  .subscribe({
+
+    next: (libros) => {
+      this.libros = libros;
+    },
+
+    error: (error) => {
+
+      console.error('Error al obtener libros:', error);
+
+    }
+
+  });
+
+}
   // Memoria para recordar qué filtros estaban activos antes del nuevo clic
   filtrosAnteriores: FiltrosBusqueda = {
     texto: '',

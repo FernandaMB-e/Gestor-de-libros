@@ -49,8 +49,11 @@
     <div class="seccion-libros">
       <h2 class="titulo-seccion">{{ tituloSeccion }}</h2>
 
-      <div class="grid-tarjetas">
-        <app-libro-card *ngFor="let libroItem of libros" [libro]="libroItem"></app-libro-card>
+     <div class="grid-tarjetas">
+        <app-libro-card
+          *ngFor="let libroItem of libros"
+          [libro]="libroItem">
+        </app-libro-card>
       </div>
     </div>
 

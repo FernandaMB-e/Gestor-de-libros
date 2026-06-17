@@ -4,6 +4,8 @@ export type EstadoLectura =
   | 'Pendiente por leer';
 
 export interface Libro {
+  _id?: string;
+
   titulo: string;
   autor: string;
   anio: number;

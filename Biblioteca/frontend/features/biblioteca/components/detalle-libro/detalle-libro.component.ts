@@ -38,4 +38,38 @@ export class DetalleLibroComponent {
       this.router.navigate(['/biblioteca']);
     }
 
+    eliminarLibro() {
+      if (!this.libro._id) {
+        alert('No se encontró el ID del libro');
+        return;
+      }
+
+      const confirmar = confirm(
+        `¿Deseas eliminar "${this.libro.titulo}"?`
+      );
+
+      if (!confirmar) {
+        return;
+      }
+
+      this.bibliotecaService
+        .eliminarLibro(this.libro._id)
+        .subscribe({
+
+          next: () => {
+
+            alert('Libro eliminado correctamente');
+
+            this.router.navigate(['/biblioteca']);
+          },
+
+          error: (error) => {
+
+            console.error(error);
+
+            alert('Error al eliminar el libro');
+          }
+        });
+    }
+
 }

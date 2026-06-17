@@ -102,14 +102,23 @@ export class AgregarLibroComponent {
             calificacion: this.calificacion,
             resena: ''
         };
-        this.bibliotecaService.agregarLibro(nuevoLibro); //aquí se llamaría al método del servicio para agregar el nuevo libro a la lista de libros (aún no implementado)
-        alert('Libro guardado correctamente');
-        this.router.navigate(['/biblioteca']); //después de guardar el libro, se navega de vuelta a la vista principal para mostrar el nuevo libro en la lista (aún no implementado)
-    }
+       this.bibliotecaService.agregarLibro(nuevoLibro)
+        .subscribe({
+        next: () => {
+            alert('Libro guardado correctamente');
+            this.router.navigate(['/biblioteca']);
+        },
 
-    estadoLeido = false;
+        error: (error) => {
+            console.error(error);
+            alert('Error al guardar el libro');
+        }
+        });
+            }
 
-}
+            estadoLeido = false;
+
+        }
 
 
 
