@@ -5,18 +5,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { Libro } from '../../models/libro.model'; 
 import { BibliotecaService } from '../../services/biblioteca.service'; 
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-agregar-libro',
   standalone: true,
-  imports: [MatIconModule, CommonModule, FormsModule],
+  imports: [MatIconModule, CommonModule, FormsModule, MatSnackBarModule],
   templateUrl: './agregar-libro.component.html',
   styleUrl: './agregar-libro.component.scss'
 })
 export class AgregarLibroComponent {
-    constructor( 
+    constructor(
         private router: Router,
-        private bibliotecaService: BibliotecaService
+        private bibliotecaService: BibliotecaService,
+        private snackBar: MatSnackBar
     ){}
 
     ngOnInit() {
@@ -158,9 +161,15 @@ export class AgregarLibroComponent {
                 .subscribe({
 
                     next: () => {
-
-                        alert(
-                            'Libro actualizado correctamente'
+                        this.snackBar.open(
+                            'Libro actualizado correctamente',
+                            'Cerrar',
+                            {
+                                duration: 3000,
+                                horizontalPosition: 'right',
+                                verticalPosition: 'top',
+                                panelClass: ['snackbar-exito']
+                            }
                         );
 
                         this.bibliotecaService
@@ -175,9 +184,16 @@ export class AgregarLibroComponent {
 
                         console.error(error);
 
-                        alert(
-                            'Error al actualizar el libro'
-                        );
+                        this.snackBar.open(
+                        'Error al actualizar el libro',
+                        'Cerrar',
+                        {
+                            duration: 4000,
+                            horizontalPosition: 'right',
+                            verticalPosition: 'top',
+                            panelClass: ['snackbar-error']
+                        }
+                    );
                     }
                 });
 
@@ -189,22 +205,32 @@ export class AgregarLibroComponent {
             .subscribe({
 
                 next: () => {
-
-                    alert(
-                        'Libro guardado correctamente'
+                    this.snackBar.open(
+                    'Libro guardado correctamente',
+                    'Cerrar',
+                    {
+                        duration: 3000,
+                        horizontalPosition: 'right',
+                        verticalPosition: 'top',
+                        panelClass: ['snackbar-exito']
+                    }
                     );
 
-                    this.router.navigate([
-                        '/biblioteca'
-                    ]);
+                    this.router.navigate(['/biblioteca']);
                 },
 
                 error: (error) => {
-
                     console.error(error);
 
-                    alert(
-                        'Error al guardar el libro'
+                    this.snackBar.open(
+                    'Error al guardar el libro',
+                    'Cerrar',
+                    {
+                        duration: 4000,
+                        horizontalPosition: 'right',
+                        verticalPosition: 'top',
+                        panelClass: ['snackbar-exito']
+                    }
                     );
                 }
             });

@@ -97,6 +97,8 @@ export class VistaPrincipalComponent implements OnInit {
   }
 
   irAgregarLibro() {
+    this.bibliotecaService.libroSeleccionado = null;
+    this.bibliotecaService.modoEdicion = false;
     this.router.navigate(['/agregar-libro']);
   }
 
