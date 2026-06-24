@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth';
 
 @Component({
@@ -18,7 +19,8 @@ import { AuthService } from '../../services/auth';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    RouterModule
+    RouterModule,
+    MatSnackBarModule
   ],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss']
@@ -34,12 +36,18 @@ export class RegistroComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   registrar(): void {
     if (this.password.trim() !== this.confirmPassword.trim()) {
-      alert('Las contraseñas no coinciden');
+      this.snackBar.open('Las contraseñas no coinciden', 'Cerrar', {
+        duration: 4000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-error']
+      });
       return;
     }
 
@@ -52,14 +60,29 @@ export class RegistroComponent {
     this.authService.registro(datos).subscribe({
       next: (respuesta) => {
         console.log('Usuario registrado:', respuesta);
-        alert('Usuario registrado correctamente');
-        this.router.navigate(['/login']);
+
+        this.snackBar.open('Usuario registrado correctamente', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success']
+        });
+
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1200);
       },
       error: (error) => {
         console.error('Error al registrar usuario:', error);
 
         const mensaje = error.error?.detail || 'No se pudo registrar el usuario';
-        alert(mensaje);
+
+        this.snackBar.open(mensaje, 'Cerrar', {
+          duration: 4000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error']
+        });
       }
     });
   }

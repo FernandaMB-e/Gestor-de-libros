@@ -36,4 +36,22 @@ body {
   margin: 0;
   height: 100%;
 }
+
 /* You can add global styles to this file, and also import other style files */
+
+.mat-mdc-snack-bar-container.snackbar-error {
+  --mdc-snackbar-container-color: #2b2529;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffc1d6;
+}
+
+.mat-mdc-snack-bar-container.snackbar-success {
+  --mdc-snackbar-container-color: #2b2529;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffc1d6;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  border-radius: 6px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+}
