@@ -1,27 +1,34 @@
 <div class="contenedor-principal">
 
   <div class="cabecera">
-    <button class="btn-volver" (click)="volver()">
+
+    <button
+        class="btn-volver"
+        (click)="volver()">
         <mat-icon>arrow_back</mat-icon>
         Volver
     </button>
 
-    <div class="corazon" (click)="toggleFavorito()">
+    <div
+        class="corazon"
+        (click)="toggleFavorito()">
         <mat-icon>
             {{ esFavorito ? 'favorite' : 'favorite_border' }}
         </mat-icon>
     </div>
+
   </div>
 
-  <h1>{{ modoEdicion ? 'Editar libro' : 'Agregar libro' }} </h1>
+  <h1>Agregar libro</h1>
 
   <div class="formulario-grid">
 
+    <!-- COLUMNA IZQUIERDA -->
     <div class="columna">
 
       <label>Título</label>
       <input type="text" placeholder="Ingresa el título del libro" [(ngModel)]="titulo">
-      <small class="error" *ngIf="mostrarErrores && !titulo"> El título es obligatorio </small>
+      <small class="error" *ngIf="mostrarErrores && !titulo"> El título es obligatorio </small> 
 
       <label>Autor</label>
       <input type="text" placeholder="Ingresa el autor" [(ngModel)]="autor">
@@ -36,48 +43,88 @@
       <small class="error" *ngIf="mostrarErrores && (!totalPaginas || totalPaginas <= 0)"> El total de páginas es obligatorio </small>
 
       <label>Género</label>
-      <select [(ngModel)]="genero">
-        <option value="Ciencia ficción">Ciencia ficción</option>
-        <option value="Fantasía">Fantasía</option>
-        <option value="Romance">Romance</option>
-        <option value="Terror">Terror</option>
-        <option value="Misterio">Misterio</option>
-        <option value="Aventura">Aventura</option>
-        <option value="Drama">Drama</option>
-        <option value="Histórico">Histórico</option>
-        <option value="Biografía">Biografía</option>
-        <option value="Otro">Otro</option>
+      <select>
+        <option>Ciencia ficción</option>
+        <option>Fantasía</option>
+        <option>Romance</option>
+        <option>Terror</option>
+        <option>Misterio</option>
+        <option>Aventura</option>
+        <option>Drama</option>
+        <option>Histórico</option>
+        <option>Biografía</option>
+        <option>Otro</option>
       </select>
 
       <label>Portada</label>
+
       <div class="subir-imagen">
-        <input type="file" accept="image/*" #fileInput hidden (change)="onImagenSeleccionada($event)">
-        <div class="area-upload" (click)="fileInput.click()">
+        <input
+            type="file"
+            accept="image/*"
+            #fileInput
+            hidden
+            (change)="onImagenSeleccionada($event)">
+
+        <div
+            class="area-upload"
+            (click)="fileInput.click()">
+
             <ng-container *ngIf="!imagenPreview">
-            <mat-icon class="icono-upload">upload</mat-icon>
+
+            <mat-icon class="icono-upload">
+                upload
+            </mat-icon>
+
             <strong>Subir imagen</strong>
-            <span>o arrastra una imagen aquí</span>
+
+            <span>
+                o arrastra una imagen aquí
+            </span>
+
             </ng-container>
-            <img *ngIf="imagenPreview" [src]="imagenPreview" class="preview-imagen">
+
+            <img
+            *ngIf="imagenPreview"
+            [src]="imagenPreview"
+            class="preview-imagen">
+
         </div>
+
       </div>
 
     </div>
 
+    <!-- COLUMNA DERECHA -->
     <div class="columna">
 
       <label>Estado de lectura</label>
+
       <div class="radios">
         <label>
-            <input type="radio" name="estado" value="Leyendo" [(ngModel)]="estadoSeleccionado">
+            <input
+            type="radio"
+            name="estado"
+            [checked]="!estadoLeido"
+            (change)="estadoLeido = false">
             Leyendo
         </label>
+
         <label>
-            <input type="radio" name="estado" value="Leídos" [(ngModel)]="estadoSeleccionado">
+            <input
+            type="radio"
+            name="estado"
+            [checked]="estadoLeido"
+            (change)="estadoLeido = true">
             Leído
         </label>
+
         <label>
-            <input type="radio" name="estado" value="Pendiente por leer" [(ngModel)]="estadoSeleccionado">
+            <input
+            type="radio"
+            name="estado"
+            [checked]="!estadoLeido"
+            (change)="estadoLeido = false">
             Pendiente por leer
         </label>
       </div>
@@ -87,42 +134,73 @@
       </p>
 
       <label>Tiempo de lectura</label>
-      <input type="text" placeholder="Ej. 5 días, 2 semanas, 1 mes" [(ngModel)]="tiempoLectura" [disabled]="estadoSeleccionado !== 'Leídos'">
+      <input type="text" placeholder="Ej. 5 días, 2 semanas, 1 mes" [disabled]="!estadoLeido">
 
       <label>Estado de disposición</label>
+
       <div class="radios">
         <label>
-            <input type="radio" name="disposicion" [value]="false" [(ngModel)]="prestado">
+            <input
+            type="radio"
+            name="disposicion"
+            [checked]="!prestado"
+            (change)="prestado = false">
             Disponible
         </label>
+
         <label>
-            <input type="radio" name="disposicion" [value]="true" [(ngModel)]="prestado">
+            <input
+            type="radio"
+            name="disposicion"
+            [checked]="prestado"
+            (change)="prestado = true">
             Prestado
         </label>
+
         </div>
 
         <div class="prestamo-box">
-        <input type="text" placeholder="Nombre de la persona" [(ngModel)]="prestadoA" [disabled]="!prestado">
-        <input type="date" [(ngModel)]="fechaPrestamo" [disabled]="!prestado">
+        <input
+            type="text"
+            placeholder="Nombre de la persona"
+            [disabled]="!prestado">
+
+        <input
+            type="date"
+            [disabled]="!prestado">
+
       </div>
 
       <label>Calificación</label>
+
       <div class="estrellas">
-        <mat-icon *ngFor="let estrella of [1,2,3,4,5]" (click)="calificar(estrella)">
+        <mat-icon
+            *ngFor="let estrella of [1,2,3,4,5]"
+            (click)="calificar(estrella)">
             {{ estrella <= calificacion ? 'star' : 'star_border' }}
         </mat-icon>
       </div>
 
       <label>Reseña</label>
-      <textarea rows="4" placeholder="Escribe tu reseña o comentario sobre el libro..." [(ngModel)]="resena"></textarea>
+
+      <textarea
+        rows="4"
+        placeholder="Escribe tu reseña o comentario sobre el libro..."></textarea>
 
       <div class="botones">
-        <button class="btn-cancelar" (click)="cancelar()">
+
+        <button
+            class="btn-cancelar"
+            (click)="cancelar()">
             Cancelar
         </button>
-        <button class="btn-guardar" (click)="guardarLibro()">
+
+        <button
+        class="btn-guardar"
+        (click)="guardarLibro()">
         Guardar
         </button>
+
       </div>
 
     </div>

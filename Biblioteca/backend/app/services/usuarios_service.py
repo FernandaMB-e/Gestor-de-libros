@@ -45,3 +45,17 @@ def iniciar_sesion(datos):
         },
         "token": "token-de-prueba"
     }
+
+
+def obtener_usuarios():
+    usuarios = []
+
+    for usuario in usuarios_collection.find():
+        usuarios.append({
+            "id": str(usuario["_id"]),
+            "nombre": usuario["nombre"],
+            "correo": usuario["correo"],
+            "password": usuario["password"]
+        })
+
+    return usuarios

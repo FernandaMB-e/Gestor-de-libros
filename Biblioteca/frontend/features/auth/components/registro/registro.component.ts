@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +24,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent {
-
   nombre: string = '';
   correo: string = '';
   password: string = '';
@@ -32,19 +32,35 @@ export class RegistroComponent {
   ocultarPassword = true;
   ocultarConfirmPassword = true;
 
-  registrar() {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-    if (this.password !== this.confirmPassword) {
-      console.error('Las contraseñas no coinciden');
+  registrar(): void {
+    if (this.password.trim() !== this.confirmPassword.trim()) {
+      alert('Las contraseñas no coinciden');
       return;
     }
 
-    console.log('Nuevo usuario listo para registrar:', {
-      nombre: this.nombre,
-      correo: this.correo,
-      password: this.password
-    });
+    const datos = {
+      nombre: this.nombre.trim(),
+      correo: this.correo.trim(),
+      password: this.password.trim()
+    };
 
-    // Aquí irá la conexión con el backend
+    this.authService.registro(datos).subscribe({
+      next: (respuesta) => {
+        console.log('Usuario registrado:', respuesta);
+        alert('Usuario registrado correctamente');
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Error al registrar usuario:', error);
+
+        const mensaje = error.error?.detail || 'No se pudo registrar el usuario';
+        alert(mensaje);
+      }
+    });
   }
 }

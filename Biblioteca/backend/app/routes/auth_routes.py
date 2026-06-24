@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.models.usuario_model import UsuarioLogin, UsuarioRegistro
-from app.controllers.usuarios_controller import registrar, login
+from app.controllers.usuarios_controller import registrar, login, listar_usuarios
 
 router = APIRouter(prefix="/auth")
 
@@ -11,3 +11,7 @@ def post_registro(usuario: UsuarioRegistro):
 @router.post("/login")
 def post_login(usuario: UsuarioLogin):
     return login(usuario)
+
+@router.get("/usuarios")
+def get_usuarios():
+    return listar_usuarios()

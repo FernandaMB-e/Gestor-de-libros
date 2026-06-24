@@ -7,6 +7,12 @@ interface LoginData {
   password: string;
 }
 
+interface RegistroData {
+  nombre: string;
+  correo: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,5 +23,9 @@ export class AuthService {
 
   login(datos: LoginData): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, datos);
+  }
+
+  registro(datos: RegistroData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/registro`, datos);
   }
 }
