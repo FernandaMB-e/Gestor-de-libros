@@ -8,19 +8,22 @@ import { VistaPrincipalComponent } from '../../frontend/features/vista-principal
 import { AgregarLibroComponent } from '../../frontend/features/biblioteca/components/agregar-libro/agregar-libro.component';
 import { DetalleLibroComponent } from '../../frontend/features/biblioteca/components/detalle-libro/detalle-libro.component';
 
+// Importamos el guard para proteger rutas
+import { authGuard } from '../../frontend/core/guards/auth-guard';
+
 export const routes: Routes = [
   // Si el usuario entra a la raíz de la página, lo mandamos al login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  
+
   // Rutas de Autenticación
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  
-  // Rutas de la Aplicación
-  { path: 'biblioteca', component: VistaPrincipalComponent },
-  { path: 'perfil', component: PerfilUsuarioComponent },
-  { path: 'agregar-libro', component: AgregarLibroComponent },
-  { path: 'detalle-libro', component: DetalleLibroComponent },
+
+  // Rutas de la Aplicación protegidas por el guard
+  { path: 'biblioteca', component: VistaPrincipalComponent, canActivate: [authGuard] },
+  { path: 'perfil', component: PerfilUsuarioComponent, canActivate: [authGuard] },
+  { path: 'agregar-libro', component: AgregarLibroComponent, canActivate: [authGuard] },
+  { path: 'detalle-libro', component: DetalleLibroComponent, canActivate: [authGuard] },
 
   // Si escriben una URL que no existe, los mandamos al login por seguridad
   { path: '**', redirectTo: 'login' }
