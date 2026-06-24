@@ -1,8 +1,9 @@
-from app.models.usuario_model import UsuarioLogin, UsuarioRegistro
+from app.models.usuario_model import UsuarioLogin, UsuarioRegistro, UsuarioActualizar
 from app.services.usuarios_service import (
     registrar_usuario,
     iniciar_sesion,
-    obtener_usuarios
+    obtener_usuarios,
+    actualizar_usuario
 )
 
 def registrar(usuario: UsuarioRegistro):
@@ -13,3 +14,6 @@ def login(usuario: UsuarioLogin):
 
 def listar_usuarios():
     return obtener_usuarios()
+
+def editar_usuario(id: str, usuario: UsuarioActualizar):
+    return actualizar_usuario(id, usuario.model_dump())

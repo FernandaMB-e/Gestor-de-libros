@@ -1,25 +1,23 @@
 <div class="perfil-pantalla">
- 
   <div class="perfil-card">
-
-    
 
     <div class="perfil-header">
       <button class="btn-volver" type="button" (click)="volver()">
-  <mat-icon>arrow_back</mat-icon>
-</button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
       <h2>Mi Perfil</h2>
     </div>
 
     <div class="perfil-contenido">
-      
 
       <!-- IZQUIERDA -->
       <div class="avatar-section">
-<div class="seccion-titulo">
-    <h3>Información personal</h3>
-    <div class="linea"></div>
-  </div>
+        <div class="seccion-titulo">
+          <h3>Información personal</h3>
+          <div class="linea"></div>
+        </div>
+
         <div class="avatar-container">
           <img
             [src]="usuario.fotoPerfil"
@@ -38,46 +36,118 @@
 
         <button
           mat-flat-button
+          type="button"
           class="btn-cambiar-foto"
           (click)="fileInput.click()"
         >
           Cambiar foto
         </button>
-
       </div>
 
       <!-- DERECHA -->
-      <div class="info-container">
+      <form class="info-container" (ngSubmit)="guardarCambios()">
 
         <div class="info-item">
-          <span class="label">Nombre de usuario</span>
+          <label class="label" for="nombre">Nombre de usuario</label>
 
-          <div class="valor">
-            <mat-icon>person</mat-icon>
-            <span>{{ usuario.nombre }}</span>
-          </div>
+          <mat-form-field appearance="outline" class="campo-full">
+            <mat-icon matPrefix>person</mat-icon>
+
+            <input
+              matInput
+              id="nombre"
+              name="nombre"
+              type="text"
+              [(ngModel)]="usuario.nombre"
+              placeholder="Nombre de usuario"
+              required
+            />
+          </mat-form-field>
         </div>
 
         <div class="info-item">
-          <span class="label">Correo electrónico</span>
+          <label class="label" for="correo">Correo electrónico</label>
 
-          <div class="valor">
-            <mat-icon>mail</mat-icon>
-            <span>{{ usuario.correo }}</span>
-          </div>
+          <mat-form-field appearance="outline" class="campo-full">
+            <mat-icon matPrefix>mail</mat-icon>
+
+            <input
+              matInput
+              id="correo"
+              name="correo"
+              type="email"
+              [(ngModel)]="usuario.correo"
+              readonly
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="info-item">
+          <label class="label" for="password">Nueva contraseña</label>
+
+          <mat-form-field appearance="outline" class="campo-full">
+            <mat-icon matPrefix>lock</mat-icon>
+
+            <input
+              matInput
+              id="password"
+              name="password"
+              [type]="ocultarPassword ? 'password' : 'text'"
+              [(ngModel)]="password"
+              placeholder="Opcional"
+            />
+
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="ocultarPassword = !ocultarPassword"
+            >
+              <mat-icon>
+                {{ ocultarPassword ? 'visibility_off' : 'visibility' }}
+              </mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div class="info-item">
+          <label class="label" for="confirmPassword">Confirmar contraseña</label>
+
+          <mat-form-field appearance="outline" class="campo-full">
+            <mat-icon matPrefix>lock</mat-icon>
+
+            <input
+              matInput
+              id="confirmPassword"
+              name="confirmPassword"
+              [type]="ocultarConfirmPassword ? 'password' : 'text'"
+              [(ngModel)]="confirmPassword"
+              placeholder="Repite la nueva contraseña"
+            />
+
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="ocultarConfirmPassword = !ocultarConfirmPassword"
+            >
+              <mat-icon>
+                {{ ocultarConfirmPassword ? 'visibility_off' : 'visibility' }}
+              </mat-icon>
+            </button>
+          </mat-form-field>
         </div>
 
         <button
           mat-flat-button
           class="btn-guardar"
-          (click)="guardarCambios()"
+          type="submit"
         >
           Guardar Cambios
         </button>
 
-      </div>
+      </form>
 
     </div>
-
   </div>
 </div>

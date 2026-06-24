@@ -1,41 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 
-import { Usuario } from '../../../../core/models/usuario.model';
+import { AuthService } from '../../../auth/services/auth';
+
+interface PerfilUsuario {
+  id: string;
+  nombre: string;
+  correo: string;
+  fotoPerfil: string;
+}
 
 @Component({
   selector: 'app-perfil-usuario',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   templateUrl: './perfil-usuario.component.html',
   styleUrls: ['./perfil-usuario.component.scss']
 })
-export class PerfilUsuarioComponent {
-
-  constructor(private router: Router) {}
-
-  // Usuario de ejemplo
-  usuario: Usuario = {
-    id: 1,
-    nombre: 'Maria Fernanda',
-    correo: 'maria@ejemplo.com',
+export class PerfilUsuarioComponent implements OnInit {
+  usuario: PerfilUsuario = {
+    id: '',
+    nombre: '',
+    correo: '',
     fotoPerfil: 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
   };
 
- 
-  onFotoSeleccionada(event: any): void {
+  password: string = '';
+  confirmPassword: string = '';
 
+  ocultarPassword: boolean = true;
+  ocultarConfirmPassword: boolean = true;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    const usuarioGuardado = localStorage.getItem('usuario');
+
+    if (!usuarioGuardado) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    const usuario = JSON.parse(usuarioGuardado);
+
+    this.usuario = {
+      id: usuario.id,
+      nombre: usuario.nombre,
+      correo: usuario.correo,
+      fotoPerfil: usuario.fotoPerfil || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+    };
+  }
+
+  onFotoSeleccionada(event: any): void {
     const archivo = event.target.files[0];
 
     if (archivo) {
-
       const lector = new FileReader();
 
       lector.onload = (e: any) => {
@@ -46,14 +81,45 @@ export class PerfilUsuarioComponent {
     }
   }
 
-  // Guardar cambios
   guardarCambios(): void {
-    console.log('Guardando perfil actualizado:', this.usuario);
+    if (this.password.trim() !== this.confirmPassword.trim()) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
+
+    const datos: any = {
+      nombre: this.usuario.nombre.trim()
+    };
+
+    if (this.password.trim()) {
+      datos.password = this.password.trim();
+    }
+
+    this.authService.actualizarUsuario(this.usuario.id, datos).subscribe({
+      next: (respuesta) => {
+        const usuarioActualizado = {
+          ...respuesta.usuario,
+          fotoPerfil: this.usuario.fotoPerfil
+        };
+
+        localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+
+        this.usuario = usuarioActualizado;
+        this.password = '';
+        this.confirmPassword = '';
+
+        alert('Perfil actualizado correctamente');
+      },
+      error: (error) => {
+        console.error('Error al actualizar perfil:', error);
+
+        const mensaje = error.error?.detail || 'No se pudo actualizar el perfil';
+        alert(mensaje);
+      }
+    });
   }
 
-  // Volver a la biblioteca
   volver(): void {
     this.router.navigate(['/biblioteca']);
   }
-
 }

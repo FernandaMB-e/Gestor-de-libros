@@ -28,4 +28,8 @@ export class AuthService {
   registro(datos: RegistroData): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/registro`, datos);
   }
+ actualizarUsuario(id: string, datos: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/auth/usuarios/${id}`, datos);
+}
+  
 }
