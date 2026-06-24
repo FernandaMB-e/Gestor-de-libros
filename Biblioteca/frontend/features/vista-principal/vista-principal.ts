@@ -110,8 +110,8 @@ filtrarLibros(filtros: FiltrosBusqueda) {
     if (filtros.estado) { parametrosLimpios.estado = filtros.estado; hayFiltros = true; }
     if (filtros.favoritos) { parametrosLimpios.favoritos = true; hayFiltros = true; }
     
-    if (filtros.disposicion === 'Disponible') { parametrosLimpios.disposicion = 'Disponible'; hayFiltros = true; }
-    if (filtros.disposicion === 'Prestado') { parametrosLimpios.disposicion = 'Prestado'; hayFiltros = true; }
+    
+    if (filtros.disposicion) parametrosLimpios.disposicion = filtros.disposicion;
 
     if (filtros.puntuacion !== null) { parametrosLimpios.puntuacion = filtros.puntuacion; hayFiltros = true; }
 

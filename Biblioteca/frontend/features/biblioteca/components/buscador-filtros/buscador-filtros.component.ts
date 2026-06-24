@@ -33,11 +33,28 @@ export class BuscadorFiltrosComponent {
   textoBusqueda = '';
   estadoSeleccionado: string | null = null;
   disposicionSeleccionada: 'Disponible' | 'Prestado' | null = null;
-  puntuacionSeleccionada: number | null = null; // Estrellas
-  favoritos: boolean = false; // Estado del botón
+  puntuacionSeleccionada: number | null = null; 
+  favoritos: boolean = false; 
   vistaActual: 'lista' | 'cuadricula' = 'cuadricula';
 
-  onFiltroCambio() {
+ 
+  onFiltroCambio(grupo: string = 'general') {
+    
+    // Si tocamos un filtro, limpiamos visualmente los demás
+    if (grupo === 'estado') {
+      this.disposicionSeleccionada = null;
+      this.puntuacionSeleccionada = null;
+      this.favoritos = false;
+    } else if (grupo === 'disposicion') {
+      this.estadoSeleccionado = null;
+      this.puntuacionSeleccionada = null;
+      this.favoritos = false;
+    } else if (grupo === 'puntuacion') {
+      this.estadoSeleccionado = null;
+      this.disposicionSeleccionada = null;
+      this.favoritos = false;
+    }
+
     this.filtrosCambio.emit({
       texto: this.textoBusqueda,
       estado: this.estadoSeleccionado,
