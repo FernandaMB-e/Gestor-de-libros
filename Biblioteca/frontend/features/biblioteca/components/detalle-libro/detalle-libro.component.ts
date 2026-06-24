@@ -4,11 +4,16 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BibliotecaService } from '../../services/biblioteca.service';
 import { Libro } from '../../models/libro.model';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogoEliminarComponent } from '../dialogo-eliminar/dialogo-eliminar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-detalle-libro',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, MatDialogModule, MatSnackBarModule],
   templateUrl: './detalle-libro.component.html',
   styleUrl: './detalle-libro.component.scss'
 })
@@ -21,7 +26,9 @@ export class DetalleLibroComponent {
     
     constructor(
       private router: Router,
-      private bibliotecaService: BibliotecaService
+      private bibliotecaService: BibliotecaService,
+      private dialog: MatDialog,
+      private snackBar: MatSnackBar
     ) {}
 
     ngOnInit() {
@@ -39,39 +46,62 @@ export class DetalleLibroComponent {
     }
 
     eliminarLibro() {
-      if (!this.libro._id) {
-        alert('No se encontró el ID del libro');
-        return;
+    const dialogRef = this.dialog.open(
+      DialogoEliminarComponent,
+      {
+        width: '400px',
+        data: {
+          titulo: this.libro.titulo
+        }
       }
+    );
 
-      const confirmar = confirm(
-        `¿Deseas eliminar "${this.libro.titulo}"?`
-      );
+    dialogRef.afterClosed().subscribe(
+      (resultado) => {
 
-      if (!confirmar) {
-        return;
-      }
+        if (!resultado) {
+          return;
+        }
 
-      this.bibliotecaService
-        .eliminarLibro(this.libro._id)
-        .subscribe({
+        this.bibliotecaService
+          .eliminarLibro(this.libro._id!)
+          .subscribe({
 
-          next: () => {
+            next: () => {
+              this.bibliotecaService.libroSeleccionado = null;
 
-            alert('Libro eliminado correctamente');
+              this.bibliotecaService.modoEdicion = false;
 
-            this.router.navigate(['/biblioteca']);
+              this.snackBar.open(
+                'Libro eliminado correctamente',
+                'Cerrar',
+                {
+                  duration: 3000,
+                  panelClass: ['snackbar-exito']
+                }
+              );
+
+              this.router.navigate(['/biblioteca']);
           },
 
-          error: (error) => {
+            error: () => {
 
-            console.error(error);
+              this.snackBar.open(
+                'Error al eliminar el libro',
+                'Cerrar',
+                {
+                  duration: 4000,
+                  panelClass: ['snackbar-error']
+                }
+              );
+            }
 
-            alert('Error al eliminar el libro');
-          }
-        });
-    }
+          });
 
+      }
+    );
+
+  }
     editarLibro() {
 
       this.bibliotecaService.libroSeleccionado =
