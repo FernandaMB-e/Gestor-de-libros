@@ -37,12 +37,11 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
-.mat-mdc-snack-bar-container.snackbar-exito {
-  --mdc-snackbar-container-color: #c62828;
-  --mdc-snackbar-supporting-text-color: white;
+
+.snackbar-exito .mdc-snackbar__surface {
+  background: #46a153 !important;
 }
 
-.mat-mdc-snack-bar-container.snackbar-error {
-  --mdc-snackbar-container-color: #8b0000;
-  --mdc-snackbar-supporting-text-color: white;
+.snackbar-error .mdc-snackbar__surface {
+  background: #dc5656 !important;
 }
