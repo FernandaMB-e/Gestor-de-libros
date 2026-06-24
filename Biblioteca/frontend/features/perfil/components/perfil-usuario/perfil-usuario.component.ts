@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../../auth/services/auth';
 
@@ -25,7 +26,8 @@ interface PerfilUsuario {
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule
   ],
   templateUrl: './perfil-usuario.component.html',
   styleUrls: ['./perfil-usuario.component.scss']
@@ -46,7 +48,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +86,16 @@ export class PerfilUsuarioComponent implements OnInit {
 
   guardarCambios(): void {
     if (this.password.trim() !== this.confirmPassword.trim()) {
-      alert('Las contraseñas no coinciden');
+      this.snackBar.open(
+        'Las contraseñas no coinciden',
+        'Cerrar',
+        {
+          duration: 4000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error']
+        }
+      );
       return;
     }
 
@@ -108,13 +120,32 @@ export class PerfilUsuarioComponent implements OnInit {
         this.password = '';
         this.confirmPassword = '';
 
-        alert('Perfil actualizado correctamente');
+        this.snackBar.open(
+          'Perfil actualizado correctamente',
+          'Cerrar',
+          {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-exito']
+          }
+        );
       },
       error: (error) => {
         console.error('Error al actualizar perfil:', error);
 
         const mensaje = error.error?.detail || 'No se pudo actualizar el perfil';
-        alert(mensaje);
+
+        this.snackBar.open(
+          mensaje,
+          'Cerrar',
+          {
+            duration: 4000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-error']
+          }
+        );
       }
     });
   }
