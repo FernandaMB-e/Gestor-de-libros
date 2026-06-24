@@ -29,7 +29,7 @@ export class PerfilUsuarioComponent {
     fotoPerfil: 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
   };
 
-  // Cuando el usuario selecciona una nueva foto
+ 
   onFotoSeleccionada(event: any): void {
 
     const archivo = event.target.files[0];
