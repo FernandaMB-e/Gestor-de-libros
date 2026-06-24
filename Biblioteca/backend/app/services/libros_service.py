@@ -13,35 +13,36 @@ def obtener_libros(
     filtro_mongodb = {}
 
     # 1. Filtro de Estado
-    if estado:
-        # En MongoDB buscamos exactamente el estado ("Leyendo", "Leídos", etc.)
+    if estado and str(estado).lower() != "null" and estado != "":
         filtro_mongodb["estadoLectura"] = estado
         
-    # 2. Filtro de Disposición (True = Disponible, False = Prestado)
-    if disposicion == "Disponible":
-        filtro_mongodb["disponible"] = True
-    elif disposicion == "Prestado":
-        filtro_mongodb["disponible"] = False
-        
-    # 3. Filtro de Puntuación
-    if puntuacion is not None:
-        filtro_mongodb["calificacion"] = puntuacion
-        
-    # 4. Filtro de Favoritos
-    if favoritos:
+    # 2. Filtro de Disposición
+    if disposicion and str(disposicion).lower() != "null" and disposicion != "":
+        if disposicion == "Disponible":
+            filtro_mongodb["disponible"] = True
+        elif disposicion == "Prestado":
+            filtro_mongodb["disponible"] = False
+            
+   
+    if puntuacion is not None and str(puntuacion).lower() != "null" and str(puntuacion) != "":
+        try:
+            filtro_mongodb["calificacion"] = int(puntuacion)
+        except ValueError:
+            pass
+            
+   
+    if favoritos is True or str(favoritos).lower() == "true":
         filtro_mongodb["favorito"] = True
         
-    # 5. Buscador de Texto (Expresiones regulares en MongoDB)
-    if busqueda:
-        # El $regex con option "i" permite buscar ignorando mayúsculas y minúsculas
-        regex = {"$regex": busqueda, "$options": "i"}
+   
+    if busqueda and str(busqueda).lower() != "null" and str(busqueda).strip() != "":
+        regex = {"$regex": str(busqueda).strip(), "$options": "i"}
         filtro_mongodb["$or"] = [
             {"titulo": regex},
             {"autor": regex},
             {"genero": regex}
         ]
 
-    # Pasamos el filtro al 'find()' de tu base de datos
     libros = []
     for libro in libros_collection.find(filtro_mongodb):
         libro["_id"] = str(libro["_id"])
@@ -51,7 +52,6 @@ def obtener_libros(
 
 
 def obtener_estadisticas():
-    # Usamos count_documents de MongoDB, que es súper rápido
     return {
         "total": libros_collection.count_documents({}),
         "leyendo": libros_collection.count_documents({"estadoLectura": "Leyendo"}),

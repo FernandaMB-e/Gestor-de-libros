@@ -54,15 +54,16 @@ export class VistaPrincipalComponent implements OnInit {
   }
 
   
+  busquedaActiva: boolean = false; 
+
   cargarTodo() {
+    this.busquedaActiva = false; 
     this.bibliotecaService.obtenerLibros().subscribe({
       next: (libros) => {
         this.libros = libros;
         this.cdr.detectChanges(); 
       },
-      error: (error) => {
-        console.error('Error al obtener libros:', error);
-      }
+      error: (error) => console.error('Error al obtener libros:', error)
     });
   }
 
@@ -99,21 +100,22 @@ export class VistaPrincipalComponent implements OnInit {
   irAPerfil() { this.router.navigate(['/perfil']); }
   cerrarSesion() { localStorage.clear(); this.router.navigate(['/login']); }
 
- filtrarLibros(filtros: FiltrosBusqueda) {
+filtrarLibros(filtros: FiltrosBusqueda) {
     this.actualizarTitulo(filtros); 
 
-    
     let parametrosLimpios: any = {};
+    let hayFiltros = false; 
     
-    if (filtros.texto) parametrosLimpios.busqueda = filtros.texto;
-    if (filtros.estado) parametrosLimpios.estado = filtros.estado;
+    if (filtros.texto) { parametrosLimpios.busqueda = filtros.texto; hayFiltros = true; }
+    if (filtros.estado) { parametrosLimpios.estado = filtros.estado; hayFiltros = true; }
+    if (filtros.favoritos) { parametrosLimpios.favoritos = true; hayFiltros = true; }
     
-    if (filtros.favoritos) parametrosLimpios.favoritos = true; 
-    
-    if (filtros.disposicion === 'Disponible') parametrosLimpios.disposicion = 'true';
-    if (filtros.disposicion === 'Prestado') parametrosLimpios.disposicion = 'false';
+    if (filtros.disposicion === 'Disponible') { parametrosLimpios.disposicion = 'Disponible'; hayFiltros = true; }
+    if (filtros.disposicion === 'Prestado') { parametrosLimpios.disposicion = 'Prestado'; hayFiltros = true; }
 
-    if (filtros.puntuacion !== null) parametrosLimpios.puntuacion = filtros.puntuacion;
+    if (filtros.puntuacion !== null) { parametrosLimpios.puntuacion = filtros.puntuacion; hayFiltros = true; }
+
+    this.busquedaActiva = hayFiltros;
 
     this.bibliotecaService.obtenerLibros(parametrosLimpios).subscribe({
       next: (librosFiltrados) => {
