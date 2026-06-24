@@ -1,9 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-
-// Importamos la interfaz Libro para poder usarla en el tipo del @input
-import { Libro } from '../../models/libro.model';
+import { BibliotecaService } from '../../services/biblioteca.service';
 
 @Component({
   selector: 'app-resumen-estadisticas',
@@ -12,51 +10,47 @@ import { Libro } from '../../models/libro.model';
   templateUrl: './resumen-estadisticas.component.html',
   styleUrls: ['./resumen-estadisticas.component.scss']
 })
-export class ResumenEstadisticasComponent {
-  // Recibimos la lista de libros desde el componente padre
-  @Input() libros: Libro[] = [];
-
-  // ==========================================
-  // GETTERS DINÁMICOS (Se actualizan solos)
-  // ==========================================
+export class ResumenEstadisticasComponent implements OnInit {
   
-  get totales(): number {
-    return this.libros.length;
+  totales: number = 0;
+  leyendo: number = 0;
+  leidos: number = 0;
+  pendientes: number = 0;
+  favoritos: number = 0;
+  prestados: number = 0;
+  disponibles: number = 0;
+
+  constructor(
+    private bibliotecaService: BibliotecaService,
+    private cdr: ChangeDetectorRef 
+  ) {}
+
+  ngOnInit() {
+    // 1. Carga inicial
+    this.cargarEstadisticas();
+
+    // 2. NUEVO: Escuchar cambios para actualizar los números al instante
+    this.bibliotecaService.libroCambiado$.subscribe(() => {
+      this.cargarEstadisticas();
+    });
   }
 
-get leyendo(): number {
-  return this.libros.filter(
-    libro => libro.estadoLectura === 'Leyendo'
-  ).length;
-}
-
-get leidos(): number {
-  return this.libros.filter(
-    libro => libro.estadoLectura === 'Leído'
-  ).length;
-}
-
-get pendientes(): number {
-  return this.libros.filter(
-    libro => libro.estadoLectura === 'Pendiente por leer'
-  ).length;
-}
-
-get favoritos(): number {
-  return this.libros.filter(
-    libro => libro.favorito
-  ).length;
-}
-
-get prestados(): number {
-  return this.libros.filter(
-    libro => !libro.disponible
-  ).length;
-}
-
-get disponibles(): number {
-  return this.libros.filter(
-    libro => libro.disponible
-  ).length;
-}
+  // 3. Extraemos la lógica a un método para poder llamarla varias veces
+  cargarEstadisticas() {
+    this.bibliotecaService.obtenerEstadisticas().subscribe({
+      next: (data) => {
+        this.totales = data.total;
+        this.leyendo = data.leyendo;
+        this.leidos = data.leidos;
+        this.pendientes = data.pendientes;
+        this.favoritos = data.favoritos;
+        this.prestados = data.prestados;
+        this.disponibles = data.total - data.prestados;
+        
+        // Avisar a Angular que los datos cambiaron
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error al cargar estadísticas', err)
+    });
+  }
 }

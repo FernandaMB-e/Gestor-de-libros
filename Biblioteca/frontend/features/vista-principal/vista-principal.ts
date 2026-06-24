@@ -1,13 +1,13 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal,ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
-//Rutas 
+
+// Rutas e imports
 import { BuscadorFiltrosComponent, FiltrosBusqueda } from '../biblioteca/components/buscador-filtros/buscador-filtros.component';
-import { LibroCardComponent } from '../biblioteca/components/libro-card/libro-card.component'; // Componente para mostrar cada libro en formato tarjeta
-import { Libro } from '../biblioteca/models/libro.model'; // Modelo de libro para definir la estructura de los datos de cada libro, se separo porque había un error
+import { LibroCardComponent } from '../biblioteca/components/libro-card/libro-card.component';
+import { Libro } from '../biblioteca/models/libro.model';
 import { ResumenEstadisticasComponent } from '../biblioteca/components/resumen-estadisticas/resumen-estadisticas.component';
 import { HeaderSaludoComponent } from '../biblioteca/components/barra-principal/saludo.component'; 
 import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
@@ -16,8 +16,7 @@ import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
   selector: 'app-vista-principal', 
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
+    CommonModule,  
     MatButtonModule, 
     MatIconModule, 
     BuscadorFiltrosComponent, 
@@ -28,69 +27,58 @@ import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
   templateUrl: './vista-principal.html', 
   styleUrl: './vista-principal.scss'     
 })
-export class VistaPrincipalComponent { 
+export class VistaPrincipalComponent implements OnInit { 
   protected readonly title = signal('Biblioteca');
   tituloSeccion = 'Mis libros';
+  libros: Libro[] = [];
 
-  constructor( // Inyectamos el Router para poder navegar entre pantallas, y el BibliotecaService para obtener la lista de libros (aún no implementado)
-    private router: Router,
-    private bibliotecaService: BibliotecaService
-  ) {}
-
-  libros: Libro[] = [ ];// Libro de ejemplo para mostrar en la vista principal  
-
-ngOnInit() {
-
-  this.bibliotecaService.obtenerLibros()
-  .subscribe({
-
-    next: (libros) => {
-      this.libros = libros;
-    },
-
-    error: (error) => {
-
-      console.error('Error al obtener libros:', error);
-
-    }
-
-  });
-
-}
-  // Memoria para recordar qué filtros estaban activos antes del nuevo clic
+  // Memoria de filtros
   filtrosAnteriores: FiltrosBusqueda = {
-    texto: '',
-    estado: null,
-    disposicion: null,
-    puntuacion: null,
-    favoritos: false
+    texto: '', estado: null, disposicion: null, puntuacion: null, favoritos: false
   };
 
- actualizarTitulo(filtros: FiltrosBusqueda) {
-    // 1. La búsqueda escrita siempre es la máxima prioridad
+  constructor(
+    private router: Router,
+    private bibliotecaService: BibliotecaService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+   
+    this.cargarTodo();
+
+   
+    this.bibliotecaService.libroCambiado$.subscribe(() => {
+      this.cargarTodo();
+    });
+  }
+
+  
+  cargarTodo() {
+    this.bibliotecaService.obtenerLibros().subscribe({
+      next: (libros) => {
+        this.libros = libros;
+        this.cdr.detectChanges(); 
+      },
+      error: (error) => {
+        console.error('Error al obtener libros:', error);
+      }
+    });
+  }
+
+  
+  actualizarTitulo(filtros: FiltrosBusqueda) {
     if (filtros.texto !== '') {
       this.tituloSeccion = `Resultados de búsqueda: "${filtros.texto}"`;
-    } 
-    // NUEVO: Comparamos con la memoria: ¿Acaba de cambiar la Puntuación?
-    else if (filtros.puntuacion !== this.filtrosAnteriores.puntuacion && filtros.puntuacion !== null) {
-      // Si es 1, ponemos "estrella", si es más, ponemos "estrellas"
+    } else if (filtros.puntuacion !== this.filtrosAnteriores.puntuacion && filtros.puntuacion !== null) {
       this.tituloSeccion = filtros.puntuacion === 1 ? '1 estrella' : `${filtros.puntuacion} estrellas`;
-    }
-    // 2. Comparamos con la memoria: ¿Acaba de cambiar la Disposición?
-    else if (filtros.disposicion !== this.filtrosAnteriores.disposicion && filtros.disposicion) {
+    } else if (filtros.disposicion !== this.filtrosAnteriores.disposicion && filtros.disposicion) {
       this.tituloSeccion = filtros.disposicion;
-    } 
-    // 3. Comparamos con la memoria: ¿Acaba de cambiar el Estado?
-    else if (filtros.estado !== this.filtrosAnteriores.estado && filtros.estado) {
+    } else if (filtros.estado !== this.filtrosAnteriores.estado && filtros.estado) {
       this.tituloSeccion = filtros.estado;
-    } 
-    // 4. Comparamos con la memoria: ¿Se acaba de presionar Favoritos?
-    else if (filtros.favoritos !== this.filtrosAnteriores.favoritos && filtros.favoritos) {
+    } else if (filtros.favoritos !== this.filtrosAnteriores.favoritos && filtros.favoritos) {
       this.tituloSeccion = 'Favoritos';
-    } 
-    // 5. Si no cambió nada nuevo, buscamos cuál sigue encendido
-    else {
-      
+    } else {
       if (filtros.puntuacion !== null) {
         this.tituloSeccion = filtros.puntuacion === 1 ? '1 estrella' : `${filtros.puntuacion} estrellas`;
       } else if (filtros.estado) {
@@ -103,29 +91,36 @@ ngOnInit() {
         this.tituloSeccion = 'Mis libros';
       }
     }
-
-    // AL FINAL: Guardamos los filtros actuales en la memoria para el siguiente clic
     this.filtrosAnteriores = { ...filtros };
   }
 
-  agregarLibroTemporal() { // Método temporal para probar la navegación a la pantalla de agregar libro, se puede eliminar después
-    this.router.navigate(['/agregar-libro']);
-  }
-
-  irAgregarLibro() {
-    this.router.navigate(['/agregar-libro']);
-  }
-
-  irAPerfil() {
-  this.router.navigate(['/perfil']);
-}
-
-cerrarSesion() {
   
-  localStorage.clear(); 
-  this.router.navigate(['/login']);
-}
+  irAgregarLibro() { this.router.navigate(['/agregar-libro']); }
+  irAPerfil() { this.router.navigate(['/perfil']); }
+  cerrarSesion() { localStorage.clear(); this.router.navigate(['/login']); }
 
-  
-}
+ filtrarLibros(filtros: FiltrosBusqueda) {
+    this.actualizarTitulo(filtros); 
 
+    
+    let parametrosLimpios: any = {};
+    
+    if (filtros.texto) parametrosLimpios.busqueda = filtros.texto;
+    if (filtros.estado) parametrosLimpios.estado = filtros.estado;
+    
+    if (filtros.favoritos) parametrosLimpios.favoritos = true; 
+    
+    if (filtros.disposicion === 'Disponible') parametrosLimpios.disposicion = 'true';
+    if (filtros.disposicion === 'Prestado') parametrosLimpios.disposicion = 'false';
+
+    if (filtros.puntuacion !== null) parametrosLimpios.puntuacion = filtros.puntuacion;
+
+    this.bibliotecaService.obtenerLibros(parametrosLimpios).subscribe({
+      next: (librosFiltrados) => {
+        this.libros = librosFiltrados;
+        this.cdr.detectChanges(); 
+      },
+      error: (error) => console.error('Error al filtrar libros:', error)
+    });
+  }
+}

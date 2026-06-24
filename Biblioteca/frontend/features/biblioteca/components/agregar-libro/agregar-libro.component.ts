@@ -42,6 +42,14 @@ export class AgregarLibroComponent {
             this.calificacion = libro.calificacion;
 
             this.imagenPreview = libro.portada;
+
+            this.estadoSeleccionado = libro.estadoLectura;
+            this.genero = libro.genero;
+            this.tiempoLectura = libro.tiempoLectura || '';
+            this.prestado = !libro.disponible;
+            this.prestadoA = libro.prestadoA || '';
+            this.fechaPrestamo = libro.fechaPrestamo || '';
+            this.resena = libro.resena || '';
         }
     }
 
@@ -90,6 +98,13 @@ export class AgregarLibroComponent {
     modoEdicion = false;
     idLibroEditar = '';
 
+    estadoSeleccionado = 'Pendiente por leer'; 
+    genero = 'Ciencia ficción';
+    tiempoLectura = '';
+    prestadoA = '';
+    fechaPrestamo = '';
+    resena = '';
+
     validarFormulario(): boolean {
         this.mostrarErrores = true;
         if (!this.titulo.trim()) {
@@ -121,13 +136,17 @@ export class AgregarLibroComponent {
             autor: this.autor,
             anio: this.anio!,
             totalPaginas: this.totalPaginas!,
-            genero: '',
+            
+            genero: this.genero, 
             portada: this.imagenPreview as string,
-            estadoLectura: 'Pendiente por leer',
-            disponible: true,
+            estadoLectura: this.estadoSeleccionado as any,
+            tiempoLectura: this.tiempoLectura,
+            disponible: !this.prestado, 
+            prestadoA: this.prestadoA,
+            fechaPrestamo: this.fechaPrestamo,
             favorito: this.esFavorito,
             calificacion: this.calificacion,
-            resena: ''
+            resena: this.resena 
         };
 
         if (this.modoEdicion) {

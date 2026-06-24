@@ -7,7 +7,7 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <button mat-icon-button class="btn-favorito" (click)="toggleFavorito()">
+    <button mat-icon-button class="btn-favorito" (click)="toggleFavorito($event)">
       <mat-icon [class.corazon-rojo]="libro.favorito">
         {{ libro.favorito ? 'favorite' : 'favorite_border' }}
       </mat-icon>

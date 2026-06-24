@@ -1,3 +1,5 @@
+from typing import Optional
+
 from app.services.libros_service import (
     obtener_libros,
     guardar_libro,
@@ -10,12 +12,18 @@ from app.services.libros_service import (
     obtener_libros,
     guardar_libro,
     eliminar_libro,
-    actualizar_libro
+    actualizar_libro,
+    obtener_estadisticas
 )
 
-def listar_libros():
-
-    return obtener_libros()
+def listar_libros(
+    busqueda: Optional[str] = None,
+    estado: Optional[str] = None,
+    disposicion: Optional[str] = None,
+    puntuacion: Optional[int] = None,
+    favoritos: Optional[bool] = None
+):
+    return obtener_libros(busqueda, estado, disposicion, puntuacion, favoritos)
 
 
 def crear_libro(libro: Libro):
@@ -32,3 +40,6 @@ def editar_libro(id, libro: Libro):
         id,
         libro.model_dump()
     )
+
+def get_estadisticas():
+    return obtener_estadisticas()

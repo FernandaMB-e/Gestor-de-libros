@@ -15,8 +15,6 @@
        <mat-icon>exit_to_app</mat-icon> Cerrar sesión
     </button>
 
-   
-
   </div>
 </div>
 
@@ -30,7 +28,7 @@
     </button>
   </div>
 
-  <app-buscador-filtros (filtrosCambio)="actualizarTitulo($event)"></app-buscador-filtros>
+  <app-buscador-filtros (filtrosCambio)="filtrarLibros($event)"></app-buscador-filtros>
 
   <div class="estado-vacio" *ngIf="libros.length === 0">
     <div class="icono-vacio">
@@ -49,19 +47,18 @@
     <div class="seccion-libros">
       <h2 class="titulo-seccion">{{ tituloSeccion }}</h2>
 
-     <div class="grid-tarjetas">
-        <app-libro-card
-          *ngFor="let libroItem of libros"
-          [libro]="libroItem">
+      <div class="grid-tarjetas">
+        <app-libro-card 
+          *ngFor="let libro of libros" 
+          [libro]="libro">
         </app-libro-card>
       </div>
     </div>
 
     <div class="seccion-sidebar">
-      <app-resumen-estadisticas [libros]="libros"></app-resumen-estadisticas>
+      <app-resumen-estadisticas></app-resumen-estadisticas>
     </div>
 
   </div>
 
-  
 </main>
