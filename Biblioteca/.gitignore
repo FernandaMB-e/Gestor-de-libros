@@ -42,3 +42,39 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos y configuración local
+.env
+.env.local
+
+
+# Dependencias y entornos virtuales en cualquier carpeta
+**/node_modules/
+**/.venv/
+**/venv/
+**/env/
+
+# Caché de Python en cualquier carpeta
+**/__pycache__/
+*.py[cod]
+
+# Caché y compilados
+**/.angular/cache/
+**/dist/
+**/tmp/
+**/out-tsc/
+**/coverage/
+
+# Configuración local
+.env
+.env.*
+!.env.example
+
