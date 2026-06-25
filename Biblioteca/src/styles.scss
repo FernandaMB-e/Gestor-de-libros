@@ -45,6 +45,7 @@ body {
   --mat-snack-bar-button-color: #ffc1d6;
 }
 
+<<<<<<< HEAD
 .mat-mdc-snack-bar-container.snackbar-success {
   --mdc-snackbar-container-color: #2b2529;
   --mdc-snackbar-supporting-text-color: #ffffff;
@@ -54,4 +55,13 @@ body {
 .mat-mdc-snack-bar-container .mdc-snackbar__surface {
   border-radius: 6px !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+=======
+.snackbar-error .mdc-snackbar__surface {
+  background: #dc5656 !important;
+}
+
+.mat-mdc-snack-bar-container.snackbar-cargando {
+  background: #1565c0 !important;
+  color: white !important;
+>>>>>>> 3c0903a (Mejora de la apariencia de detalles del libro)
 }

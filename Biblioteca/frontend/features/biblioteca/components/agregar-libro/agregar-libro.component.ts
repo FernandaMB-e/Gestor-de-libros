@@ -8,6 +8,7 @@ import { BibliotecaService } from '../../services/biblioteca.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-agregar-libro',
   standalone: true,
@@ -70,20 +71,46 @@ export class AgregarLibroComponent {
     this.calificacion = valor;
     }
 
-    onImagenSeleccionada(event: Event) { 
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
-        return;
-    }
+    onImagenSeleccionada(event: Event) {
 
-    const archivo = input.files[0]; 
-    const reader = new FileReader(); 
+        const input = event.target as HTMLInputElement;
 
-    reader.onload = () => { 
-        this.imagenPreview = reader.result;
-    };
+        if (!input.files || input.files.length === 0) {
+            return;
+        }
 
-    reader.readAsDataURL(archivo); 
+        // Mostrar inmediatamente que comenzó la carga
+        const cargando = this.snackBar.open(
+            'Cargando imagen...',
+            '',
+            {
+                duration: undefined,
+                panelClass: ['snackbar-cargando']
+            }
+        );
+
+        const archivo = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = () => {
+
+            this.imagenPreview = reader.result;
+
+            // Cerrar el mensaje de cargando
+            cargando.dismiss();
+
+            // Mostrar éxito
+            this.snackBar.open(
+                'Imagen cargada correctamente',
+                'Cerrar',
+                {
+                    duration: 2500,
+                    panelClass: ['snackbar-exito']
+                }
+            );
+        };
+
+        reader.readAsDataURL(archivo);
     }
 
     prestado = false; 
@@ -107,6 +134,8 @@ export class AgregarLibroComponent {
     prestadoA = '';
     fechaPrestamo = '';
     resena = '';
+    cargandoImagen = false;
+    mensajeCarga = '';
 
     validarFormulario(): boolean {
         this.mostrarErrores = true;
