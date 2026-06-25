@@ -43,7 +43,7 @@
       <small class="error" *ngIf="mostrarErrores && (!totalPaginas || totalPaginas <= 0)"> El total de páginas es obligatorio </small>
 
       <label>Género</label>
-      <select>
+      <select [(ngModel)]="genero">
         <option>Ciencia ficción</option>
         <option>Fantasía</option>
         <option>Romance</option>
@@ -103,19 +103,19 @@
       <div class="radios">
         <label>
             <input
-            type="radio"
-            name="estado"
-            [checked]="!estadoLeido"
-            (change)="estadoLeido = false">
-            Leyendo
+              type="radio"
+              name="estado"
+              value="Leyendo"
+              [(ngModel)]="estadoSeleccionado">
+              Leyendo
         </label>
 
         <label>
             <input
             type="radio"
             name="estado"
-            [checked]="estadoLeido"
-            (change)="estadoLeido = true">
+            value="Leído"
+            [(ngModel)]="estadoSeleccionado">
             Leído
         </label>
 
@@ -123,8 +123,8 @@
             <input
             type="radio"
             name="estado"
-            [checked]="!estadoLeido"
-            (change)="estadoLeido = false">
+            value="Pendiente por leer"
+            [(ngModel)]="estadoSeleccionado">
             Pendiente por leer
         </label>
       </div>
@@ -134,7 +134,11 @@
       </p>
 
       <label>Tiempo de lectura</label>
-      <input type="text" placeholder="Ej. 5 días, 2 semanas, 1 mes" [disabled]="!estadoLeido">
+      <input
+      type="text"
+      placeholder="Ej. 5 días"
+      [(ngModel)]="tiempoLectura"
+      [disabled]="estadoSeleccionado !== 'Leído'">
 
       <label>Estado de disposición</label>
 
@@ -143,8 +147,8 @@
             <input
             type="radio"
             name="disposicion"
-            [checked]="!prestado"
-            (change)="prestado = false">
+            [value]="false"
+            [(ngModel)]="prestado">
             Disponible
         </label>
 
@@ -152,23 +156,25 @@
             <input
             type="radio"
             name="disposicion"
-            [checked]="prestado"
-            (change)="prestado = true">
+            [value]="true"
+            [(ngModel)]="prestado">
             Prestado
         </label>
-
         </div>
-
+        
+        <label>Nombre y fecha de préstamo</label>
         <div class="prestamo-box">
         <input
-            type="text"
-            placeholder="Nombre de la persona"
-            [disabled]="!prestado">
-
+        type="text"
+        placeholder="Nombre de la persona"
+        [(ngModel)]="prestadoA"
+        [disabled]="!prestado">
+        
         <input
-            type="date"
-            [disabled]="!prestado">
-
+        type="date"
+        [(ngModel)]="fechaPrestamo"
+        [disabled]="!prestado">
+        
       </div>
 
       <label>Calificación</label>
@@ -184,8 +190,10 @@
       <label>Reseña</label>
 
       <textarea
-        rows="4"
-        placeholder="Escribe tu reseña o comentario sobre el libro..."></textarea>
+          rows="4"
+          placeholder="Escribe tu reseña..."
+          [(ngModel)]="resena">
+      </textarea>
 
       <div class="botones">
 

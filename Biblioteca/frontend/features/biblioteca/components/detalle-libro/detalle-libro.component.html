@@ -12,8 +12,10 @@
     <div class="acciones">
 
       <div class="corazon">
-        <mat-icon>favorite</mat-icon>
-    </div>
+          <mat-icon>
+              {{ libro.favorito ? 'favorite' : 'favorite_border' }}
+          </mat-icon>
+      </div>
 
       <button
         class="btn-editar"
