@@ -9,7 +9,7 @@ import { Libro } from '../models/libro.model';
 export class BibliotecaService {
   libroCambiado$ = new Subject<void>();
 
-  private apiUrl = 'http://127.0.0.1:8000/libros/';
+  private apiUrl = `http://${window.location.hostname}:8000/libros/`;
 
   libroSeleccionado: Libro | null = null;
   modoEdicion = false;
@@ -72,7 +72,7 @@ export class BibliotecaService {
     };
 
     return this.http.put(
-      `http://127.0.0.1:8000/libros/${id}`,
+      `${this.apiUrl}${id}`,
       libroConUsuario
     );
   }
@@ -86,7 +86,7 @@ export class BibliotecaService {
       params = params.set('usuarioId', usuarioId);
     }
 
-    return this.http.delete(`http://127.0.0.1:8000/libros/${id}`, { params });
+    return this.http.delete(`${this.apiUrl}${id}`, { params });
   }
 
   obtenerEstadisticas(): Observable<any> {

@@ -17,22 +17,23 @@ interface RegistroData {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000';
+  private apiUrl = `http://${window.location.hostname}:8000/auth`;
 
   constructor(private http: HttpClient) {}
 
   login(datos: LoginData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login`, datos);
+    return this.http.post(`${this.apiUrl}/login`, datos);
   }
 
   registro(datos: RegistroData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/registro`, datos);
+    return this.http.post(`${this.apiUrl}/registro`, datos);
   }
- actualizarUsuario(id: string, datos: any): Observable<any> {
-  return this.http.put(`${this.apiUrl}/auth/usuarios/${id}`, datos);
-}
-actualizarFoto(id: string, datos: any): Observable<any> {
-  return this.http.put(`${this.apiUrl}/auth/usuarios/actualizarfoto/${id}`, datos);
-}
 
+  actualizarUsuario(id: string, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/usuarios/${id}`, datos);
+  }
+
+  actualizarFoto(id: string, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/usuarios/actualizarfoto/${id}`, datos);
+  }
 }
