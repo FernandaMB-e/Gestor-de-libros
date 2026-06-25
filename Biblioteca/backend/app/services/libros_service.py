@@ -76,7 +76,7 @@ def obtener_estadisticas(usuarioId: Optional[str] = None):
         }),
         "leidos": libros_collection.count_documents({
             "usuarioId": usuarioId,
-            "estadoLectura": "Leídos"
+            "estadoLectura": "Leído"
         }),
         "pendientes": libros_collection.count_documents({
             "usuarioId": usuarioId,
