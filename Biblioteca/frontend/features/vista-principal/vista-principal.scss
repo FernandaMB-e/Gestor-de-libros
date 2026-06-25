@@ -181,3 +181,14 @@
   /* Reducimos el espacio de abajo para pegarlo a la barra de filtros */
   margin-bottom: 0.5rem; 
 }
+
+.mensaje-sin-resultados {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 18px;
+  font-weight: 600;
+}

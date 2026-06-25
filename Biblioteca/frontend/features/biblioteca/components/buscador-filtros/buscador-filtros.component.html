@@ -10,23 +10,23 @@
     
     <button mat-flat-button class="btn-buscar" (click)="ejecutarBusqueda()">Buscar</button>
 
-    <mat-form-field appearance="outline" class="filtro-select btn-estado">
-      <mat-select placeholder="Estado" [(ngModel)]="estadoSeleccionado" (selectionChange)="onFiltroCambio()">
-        <mat-option value="Leyendo">Leyendo</mat-option>
-        <mat-option value="Leídos">Leídos</mat-option>
-        <mat-option value="Pendiente por leer">Pendientes por leer</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="filtro-select btn-estado">
+    <mat-select placeholder="Estado" [(ngModel)]="estadoSeleccionado" (selectionChange)="onFiltroCambio('estado')">
+      <mat-option value="Leyendo">Leyendo</mat-option>
+      <mat-option value="Leídos">Leídos</mat-option>
+      <mat-option value="Pendiente por leer">Pendientes por leer</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-form-field appearance="outline" class="filtro-select btn-disposicion">
-      <mat-select placeholder="Disposición" [(ngModel)]="disposicionSeleccionada" (selectionChange)="onFiltroCambio()">
-        <mat-option value="Disponible">Disponible</mat-option>
-        <mat-option value="Prestado">Prestado</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field appearance="outline" class="filtro-select btn-disposicion">
+    <mat-select placeholder="Disposición" [(ngModel)]="disposicionSeleccionada" (selectionChange)="onFiltroCambio('disposicion')">
+      <mat-option value="Disponible">Disponible</mat-option>
+      <mat-option value="Prestado">Prestado</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-form-field appearance="outline" class="filtro-select btn-puntuacion">
-      <mat-select placeholder="Puntuación" [(ngModel)]="puntuacionSeleccionada" (selectionChange)="onFiltroCambio()">
+  <mat-form-field appearance="outline" class="filtro-select btn-puntuacion">
+    <mat-select placeholder="Puntuación" [(ngModel)]="puntuacionSeleccionada" (selectionChange)="onFiltroCambio('puntuacion')">
         
         <mat-select-trigger>
           <span class="opcion-puntuacion" *ngIf="puntuacionSeleccionada">

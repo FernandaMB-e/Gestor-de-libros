@@ -39,37 +39,42 @@ export class BuscadorFiltrosComponent {
 
  
   onFiltroCambio(grupo: string = 'general') {
-    
-    // Si tocamos un filtro, limpiamos visualmente los demás
-    if (grupo === 'estado') {
-      this.disposicionSeleccionada = null;
-      this.puntuacionSeleccionada = null;
-      this.favoritos = false;
-    } else if (grupo === 'disposicion') {
-      this.estadoSeleccionado = null;
-      this.puntuacionSeleccionada = null;
-      this.favoritos = false;
-    } else if (grupo === 'puntuacion') {
-      this.estadoSeleccionado = null;
-      this.disposicionSeleccionada = null;
-      this.favoritos = false;
-    }
-
-    this.filtrosCambio.emit({
-      texto: this.textoBusqueda,
-      estado: this.estadoSeleccionado,
-      disposicion: this.disposicionSeleccionada,
-      puntuacion: this.puntuacionSeleccionada,
-      favoritos: this.favoritos
-    });
+  if (grupo === 'estado') {
+    this.disposicionSeleccionada = null;
+    this.puntuacionSeleccionada = null;
+    this.favoritos = false;
+  } else if (grupo === 'disposicion') {
+    this.estadoSeleccionado = null;
+    this.puntuacionSeleccionada = null;
+    this.favoritos = false;
+  } else if (grupo === 'puntuacion') {
+    this.estadoSeleccionado = null;
+    this.disposicionSeleccionada = null;
+    this.favoritos = false;
   }
+
+  this.filtrosCambio.emit({
+    texto: this.textoBusqueda,
+    estado: this.estadoSeleccionado,
+    disposicion: this.disposicionSeleccionada,
+    puntuacion: this.puntuacionSeleccionada,
+    favoritos: this.favoritos
+  });
+}
 
   ejecutarBusqueda() { this.onFiltroCambio(); }
 
   toggleFavoritos() {
-    this.favoritos = !this.favoritos;
-    this.onFiltroCambio();
+  this.favoritos = !this.favoritos;
+
+  if (this.favoritos) {
+    this.estadoSeleccionado = null;
+    this.disposicionSeleccionada = null;
+    this.puntuacionSeleccionada = null;
   }
+
+  this.onFiltroCambio();
+}
 
   mostrarTodos() {
     this.textoBusqueda = '';

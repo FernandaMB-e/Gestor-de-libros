@@ -11,6 +11,7 @@ import { Libro } from '../biblioteca/models/libro.model';
 import { ResumenEstadisticasComponent } from '../biblioteca/components/resumen-estadisticas/resumen-estadisticas.component';
 import { HeaderSaludoComponent } from '../biblioteca/components/barra-principal/saludo.component';
 import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-vista-principal',
@@ -18,6 +19,7 @@ import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
   imports: [
     CommonModule,
     MatButtonModule,
+    MatTooltipModule,
     MatIconModule,
     BuscadorFiltrosComponent,
     LibroCardComponent,
@@ -29,8 +31,15 @@ import { BibliotecaService } from '../biblioteca/services/biblioteca.service';
 })
 export class VistaPrincipalComponent implements OnInit {
   protected readonly title = signal('Biblioteca');
+
   tituloSeccion = 'Mis libros';
   libros: Libro[] = [];
+
+  
+  nombreUsuario: string = 'Usuario';
+
+  
+  totalLibros = 0;
 
   filtrosAnteriores: FiltrosBusqueda = {
     texto: '',
@@ -49,11 +58,26 @@ export class VistaPrincipalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.cargarUsuario();
     this.cargarTodo();
 
     this.bibliotecaService.libroCambiado$.subscribe(() => {
       this.cargarTodo();
     });
+  }
+
+  cargarUsuario() {
+    const usuarioGuardado = localStorage.getItem('usuario');
+
+    if (usuarioGuardado) {
+      try {
+        const usuario = JSON.parse(usuarioGuardado);
+        this.nombreUsuario = usuario.nombre || 'Usuario';
+      } catch (error) {
+        console.error('Error al leer el usuario guardado:', error);
+        this.nombreUsuario = 'Usuario';
+      }
+    }
   }
 
   cargarTodo() {
@@ -62,10 +86,22 @@ export class VistaPrincipalComponent implements OnInit {
     this.bibliotecaService.obtenerLibros().subscribe({
       next: (libros) => {
         this.libros = libros;
+
+        // Aquí guardamos el total real de libros de la biblioteca
+        this.totalLibros = libros.length;
+
         this.cdr.detectChanges();
       },
       error: (error) => console.error('Error al obtener libros:', error)
     });
+  }
+
+  obtenerMensajeVacio(): string {
+    if (this.busquedaActiva && this.totalLibros > 0) {
+      return 'No hay ningún libro con esa descripción';
+    }
+
+    return 'Aún no has agregado ningún libro';
   }
 
   actualizarTitulo(filtros: FiltrosBusqueda) {
@@ -135,6 +171,7 @@ export class VistaPrincipalComponent implements OnInit {
 
     if (filtros.disposicion) {
       parametrosLimpios.disposicion = filtros.disposicion;
+      hayFiltros = true;
     }
 
     if (filtros.puntuacion !== null) {

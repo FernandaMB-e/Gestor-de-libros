@@ -8,32 +8,35 @@
   <div class="acciones-usuario">
     
     <button mat-icon-button (click)="irAPerfil()" matTooltip="Ver perfil" class="btn-perfil">
-       <mat-icon>account_circle</mat-icon>
+      <mat-icon>account_circle</mat-icon>
     </button>
 
     <button mat-button type="button" (click)="cerrarSesion()">
-  Cerrar sesión
-</button>
+      Cerrar sesión
+    </button>
 
   </div>
 </div>
 
-<app-barra-principal></app-barra-principal>
+<app-barra-principal [nombreUsuario]="nombreUsuario"></app-barra-principal>
 
 <main class="app-container">
   
-  <div class="contenedor-acciones-top" *ngIf="libros.length > 0">
+  <div class="contenedor-acciones-top" *ngIf="totalLibros > 0">
     <button mat-flat-button class="btn-agregar-top" (click)="irAgregarLibro()">
       <mat-icon>add</mat-icon> Agregar libro
     </button>
   </div>
 
-  <app-buscador-filtros (filtrosCambio)="filtrarLibros($event)"></app-buscador-filtros>
+  <app-buscador-filtros 
+    (filtrosCambio)="filtrarLibros($event)">
+  </app-buscador-filtros>
 
-  <div class="estado-vacio" *ngIf="libros.length === 0">
+  <div class="estado-vacio" *ngIf="totalLibros === 0">
     <div class="icono-vacio">
       <mat-icon>auto_stories</mat-icon> 
     </div>
+
     <h2>No tienes ningún libro por el momento</h2>
     <p>Puedes comenzar a agregar libros pulsando el siguiente botón</p>
     
@@ -42,12 +45,16 @@
     </button>
   </div>
 
-  <div class="layout-principal" *ngIf="libros.length > 0">
+  <div class="layout-principal" *ngIf="totalLibros > 0">
     
     <div class="seccion-libros">
       <h2 class="titulo-seccion">{{ tituloSeccion }}</h2>
 
-      <div class="grid-tarjetas">
+      <div class="mensaje-sin-resultados" *ngIf="libros.length === 0 && busquedaActiva">
+        <p>{{ obtenerMensajeVacio() }}</p>
+      </div>
+
+      <div class="grid-tarjetas" *ngIf="libros.length > 0">
         <app-libro-card 
           *ngFor="let libro of libros" 
           [libro]="libro">
