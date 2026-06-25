@@ -18,11 +18,14 @@
 }
 
 /* Panel derecho */
-.lado-login {
+.lado-login,
+.lado-registro {
   width: 72%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .auth-card {
@@ -95,77 +98,58 @@
   width: 100%;
 }
 
-.icono-gris {
-  color: #9ca3af;
-}
-
+.icono-gris,
 .btn-ojito {
   color: #9ca3af;
 }
 
 /* Botón */
+.btn-registrar,
 .btn-entrar {
   width: 100%;
   height: 52px;
+  margin-top: 1rem;
   background-color: #8fd8b5 !important;
   color: #123d32 !important;
   border-radius: 30px !important;
   font-size: 1.1rem;
   font-weight: 700;
-  margin-top: 1rem;
   transition: background-color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
   box-shadow: 0 6px 14px rgba(31, 107, 70, 0.18);
 }
 
-.btn-entrar:hover {
-  background-color:  #43a276 !important;
+.btn-registrar:hover:not(:disabled),
+.btn-entrar:hover:not(:disabled) {
+  background-color: #43a276 !important;
   box-shadow: 0 8px 18px rgba(31, 107, 70, 0.25);
 }
 
-.btn-entrar:active {
-  background-color: #cfe8da !important;
+.btn-registrar:active:not(:disabled),
+.btn-entrar:active:not(:disabled) {
+  background-color: #348962 !important;
   transform: scale(0.98);
   box-shadow: 0 3px 8px rgba(31, 107, 70, 0.25);
 }
 
-.btn-entrar:disabled {
+.btn-registrar:disabled,
+.btn-registrar[disabled],
+.btn-registrar.mat-mdc-button-disabled,
+.btn-entrar:disabled,
+.btn-entrar[disabled],
+.btn-entrar.mat-mdc-button-disabled {
   background-color: #cfe8da !important;
   color: #7a9588 !important;
-  box-shadow: none;
+  box-shadow: none !important;
   cursor: not-allowed;
+  opacity: 1 !important;
+
+  --mdc-protected-button-disabled-container-color: #cfe8da;
+  --mdc-protected-button-disabled-label-text-color: #7a9588;
+  --mat-protected-button-disabled-container-color: #cfe8da;
+  --mat-protected-button-disabled-label-text-color: #7a9588;
 }
 
-/* Footer */
-.auth-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.auth-footer p {
-  font-size: 0.9rem;
-  color: #6b7280;
-}
-
-.link-accion {
-  color: #3e8f7c;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.link-accion:hover {
-  text-decoration: underline;
-}
-
-/* Angular Material */
-::ng-deep .mat-mdc-form-field {
-  width: 100%;
-}
-
-::ng-deep .mat-mdc-text-field-wrapper {
-  border-radius: 8px !important;
-}
-
+/* Links */
 .registro-link,
 .login-link {
   margin-top: 1.5rem;
@@ -201,4 +185,83 @@
 .login-link a:active,
 .auth-form a:active {
   color: #165143 !important;
+}
+
+/* Angular Material */
+::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 8px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-pantalla {
+    flex-direction: column;
+  }
+
+  .lado-imagen {
+    width: 100%;
+    min-width: 0;
+    height: 220px;
+  }
+
+  .lado-imagen img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .lado-login,
+  .lado-registro {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lado-imagen {
+    height: 170px;
+  }
+
+  .lado-imagen img {
+    height: 170px;
+  }
+
+  .lado-login,
+  .lado-registro {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .auth-header h3 {
+    font-size: 1rem;
+    margin-top: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .btn-registrar,
+  .btn-entrar {
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .registro-link,
+  .login-link {
+    font-size: 0.9rem;
+  }
 }

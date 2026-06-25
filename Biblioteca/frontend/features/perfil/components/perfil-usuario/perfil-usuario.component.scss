@@ -9,37 +9,32 @@
 
 .perfil-card {
   position: relative;
-  background: #fff;
   width: 100%;
   max-width: 600px;
-  min-height: 350px;
   padding: 4rem;
+  background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* BOTÓN VOLVER */
 .btn-volver {
   position: absolute;
   top: 24px;
   left: 24px;
-
   border: none;
   background: transparent;
-  box-shadow: none;
-  padding: 0;
   cursor: pointer;
-
   color: #111827;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+  padding: 0;
 
-.btn-volver mat-icon {
-  font-size: 28px;
-  width: 28px;
-  height: 28px;
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .perfil-header {
@@ -80,11 +75,24 @@
 
 .btn-cambiar-foto {
   margin-top: 1.5rem !important;
-  background-color: #d8ebe0 !important;
-  color: #2e5c53 !important;
-  border-radius: 8px !important;
-  padding: 0.8rem 1.5rem !important;
-  font-weight: 600;
+  padding: 0.85rem 1.8rem !important;
+  border-radius: 999px !important;
+  background-color: #8fd8b5 !important;
+  color: #123d32 !important;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(46, 92, 83, 0.25);
+}
+
+.btn-cambiar-foto:hover {
+  background-color: #43a276 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(46, 92, 83, 0.35);
+}
+
+.btn-cambiar-foto:active {
+  background-color: #348962 !important;
+  transform: translateY(0);
 }
 
 .info-container {
@@ -98,10 +106,14 @@
 
 .label {
   display: block;
+  margin-bottom: 0.75rem;
   font-size: 0.95rem;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 0.75rem;
+}
+
+.campo-full {
+  width: 100%;
 }
 
 .valor {
@@ -117,45 +129,127 @@
 }
 
 .btn-guardar {
+  display: block;
   margin-top: 1rem !important;
-  background-color: #2e5c53 !important;
-  color: white !important;
-  border-radius: 8px !important;
-  padding: 0.9rem 2rem !important;
-  font-weight: 600;
+  margin-left: auto !important;
+  margin-right: 1rem !important;
   min-width: 180px;
+  padding: 0.5rem 2rem !important;
+  border-radius: 999px !important;
+  background-color: #2e8b78 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(46, 92, 83, 0.35);
+  margin: 1rem auto 0 auto !important;
+}
+
+.btn-guardar:hover:not(:disabled) {
+  background-color: #247463 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(46, 92, 83, 0.45);
+}
+
+.btn-guardar:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-guardar:disabled,
+.btn-guardar[disabled],
+.btn-guardar.mat-mdc-button-disabled {
+  background-color: #d1d5db !important;
+  color: #6b7280 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  cursor: not-allowed;
+  transform: none;
+
+  --mdc-protected-button-disabled-container-color: #d1d5db;
+  --mdc-protected-button-disabled-label-text-color: #6b7280;
+  --mat-protected-button-disabled-container-color: #d1d5db;
+  --mat-protected-button-disabled-label-text-color: #6b7280;
+}
+
+.btn-guardar:disabled .mdc-button__label,
+.btn-guardar[disabled] .mdc-button__label,
+.btn-guardar.mat-mdc-button-disabled .mdc-button__label {
+  color: #6b7280 !important;
+  font-weight: 700;
 }
 
 .seccion-titulo {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 
   h3 {
+    margin: 0;
     font-size: 2rem;
     font-weight: 450;
     color: #2e5c53;
-    margin: 0;
+    line-height: 1.15;
   }
 
   .linea {
     width: 300px;
     height: 4px;
+    margin-top: 14px;
     background-color: #2e8b78;
-    margin-top: 12px;
   }
 }
 
 @media (max-width: 768px) {
+  .perfil-card {
+    padding: 3rem 2rem;
+  }
+
   .perfil-contenido {
     flex-direction: column;
     gap: 2rem;
   }
 
-  .info-container {
+  .info-container,
+  .btn-guardar,
+  .btn-cambiar-foto {
     width: 100%;
     max-width: 100%;
   }
 
   .btn-guardar {
-    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-pantalla {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .perfil-card {
+    padding: 4rem 1.25rem 2rem;
+    border-radius: 12px;
+  }
+
+  .perfil-header {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+
+  .seccion-titulo {
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    .linea {
+      width: 100%;
+    }
+  }
+
+  .avatar-container {
+    width: 120px;
+    height: 120px;
   }
 }

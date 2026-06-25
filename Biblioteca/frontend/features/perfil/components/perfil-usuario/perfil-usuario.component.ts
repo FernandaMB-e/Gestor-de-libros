@@ -45,6 +45,7 @@ export class PerfilUsuarioComponent implements OnInit {
 
   ocultarPassword: boolean = true;
   ocultarConfirmPassword: boolean = true;
+  selectedFile: File | null = null;
 
   constructor(
     private router: Router,
@@ -70,48 +71,88 @@ export class PerfilUsuarioComponent implements OnInit {
     };
   }
 
-  onFotoSeleccionada(event: any): void {
-    const archivo = event.target.files[0];
-
-    if (archivo) {
-      const lector = new FileReader();
-
-      lector.onload = (e: any) => {
-        this.usuario.fotoPerfil = e.target.result;
-      };
-
-      lector.readAsDataURL(archivo);
-    }
+  abrirSelectorFoto(fileInput: HTMLInputElement): void {
+    fileInput.value = '';
+    fileInput.click();
   }
 
-  guardarCambios(): void {
-    if (this.password.trim() !== this.confirmPassword.trim()) {
-      this.snackBar.open(
-        'Las contraseñas no coinciden',
-        'Cerrar',
-        {
-          duration: 4000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['snackbar-error']
-        }
-      );
+  onFotoSeleccionada(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const archivo = input.files?.[0];
+
+    if (!archivo) {
       return;
     }
 
-    const datos: any = {
-      nombre: this.usuario.nombre.trim()
+    const lector = new FileReader();
+
+    lector.onload = () => {
+      const fotoBase64 = lector.result as string;
+
+      this.usuario.fotoPerfil = fotoBase64;
+
+      const datos = {
+        nombre: this.usuario.nombre.trim(),
+        fotoPerfil: fotoBase64
+      };
+
+      this.authService.actualizarFoto(this.usuario.id, datos).subscribe({
+        next: (respuesta) => {
+          const usuarioActualizado = {
+            ...respuesta.usuario,
+            fotoPerfil: respuesta.usuario.fotoPerfil || fotoBase64
+          };
+
+          this.usuario = usuarioActualizado;
+          localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+
+          this.snackBar.open(
+            'Foto actualizada correctamente',
+            'Cerrar',
+            {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['snackbar-exito']
+            }
+          );
+        },
+        error: (error) => {
+          console.error('Error al actualizar foto:', error);
+
+          this.snackBar.open(
+            'No se pudo actualizar la foto',
+            'Cerrar',
+            {
+              duration: 4000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['snackbar-error']
+            }
+          );
+        }
+      });
     };
 
-    if (this.password.trim()) {
-      datos.password = this.password.trim();
+    lector.readAsDataURL(archivo);
+  }
+
+  guardarCambios(): void {
+    if (!this.formularioCompleto()) {
+      return;
     }
+
+    const datos = {
+      nombre: this.usuario.nombre.trim(),
+      fotoPerfil: this.usuario.fotoPerfil,
+      password: this.password.trim()
+    };
 
     this.authService.actualizarUsuario(this.usuario.id, datos).subscribe({
       next: (respuesta) => {
         const usuarioActualizado = {
           ...respuesta.usuario,
-          fotoPerfil: this.usuario.fotoPerfil
+          fotoPerfil: respuesta.usuario.fotoPerfil || this.usuario.fotoPerfil
         };
 
         localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
@@ -152,5 +193,15 @@ export class PerfilUsuarioComponent implements OnInit {
 
   volver(): void {
     this.router.navigate(['/biblioteca']);
+  }
+
+  formularioCompleto(): boolean {
+    return (
+      this.usuario.nombre.trim() !== '' &&
+      this.usuario.correo.trim() !== '' &&
+      this.password.trim() !== '' &&
+      this.confirmPassword.trim() !== '' &&
+      this.password.trim() === this.confirmPassword.trim()
+    );
   }
 }

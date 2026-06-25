@@ -31,5 +31,8 @@ export class AuthService {
  actualizarUsuario(id: string, datos: any): Observable<any> {
   return this.http.put(`${this.apiUrl}/auth/usuarios/${id}`, datos);
 }
-  
+actualizarFoto(id: string, datos: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/auth/usuarios/actualizarfoto/${id}`, datos);
+}
+
 }

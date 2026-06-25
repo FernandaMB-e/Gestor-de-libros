@@ -38,7 +38,7 @@
           mat-flat-button
           type="button"
           class="btn-cambiar-foto"
-          (click)="fileInput.click()"
+          (click)="abrirSelectorFoto(fileInput)"
         >
           Cambiar foto
         </button>
@@ -137,15 +137,14 @@
             </button>
           </mat-form-field>
         </div>
-
-        <button
-          mat-flat-button
-          class="btn-guardar"
-          type="submit"
-        >
-          Guardar Cambios
-        </button>
-
+      <button
+  mat-raised-button
+  class="btn-guardar"
+  (click)="guardarCambios()"
+  [disabled]="!formularioCompleto()"
+>
+  Guardar cambios
+</button>
       </form>
 
     </div>

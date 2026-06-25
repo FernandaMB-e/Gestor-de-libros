@@ -118,7 +118,7 @@
 }
 
 .btn-entrar:hover {
-  background-color: #43a276 !important;
+  background-color: #76cfa5 !important;
   box-shadow: 0 8px 18px rgba(31, 107, 70, 0.25);
 }
 
@@ -182,5 +182,64 @@
 
   a:hover {
     text-decoration: underline;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-pantalla {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .lado-imagen {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 220px;
+  }
+
+  .lado-imagen img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .lado-login {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lado-imagen {
+    height: 170px;
+  }
+
+  .lado-imagen img {
+    height: 170px;
+  }
+
+  .lado-login {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .auth-header h3 {
+    font-size: 1rem;
+  }
+
+  .btn-entrar {
+    height: 50px;
+    font-size: 1rem;
   }
 }
