@@ -178,93 +178,60 @@
   font-weight: 600;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .app-container {
-    padding: 0.5rem 1rem 2rem 1rem;
+    padding: 0.5rem 1rem 2rem 1rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
   }
 
   .layout-principal {
-    margin-top: 1.2rem;
-    gap: 1.2rem;
+    display: block !important;
+    width: 100% !important;
+    margin-top: 1.2rem !important;
   }
 
   .seccion-libros {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    display: block !important;
+  }
+
+  .seccion-sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+    display: block !important;
+    margin-top: 2rem !important;
+  }
+
+  app-resumen-estadisticas {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .titulo-seccion {
-    font-size: 1.25rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-
-  .grid-tarjetas {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem;
-  }
-
-  .contenedor-acciones-top {
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-
-  .btn-agregar-top {
-    width: 70%;
-    max-width: 260px;
-    height: 46px;
-    font-size: 0.9rem;
-  }
-
-  .seccion-sidebar {
-    width: 100%;
-  }
-}
-
-
-@media (max-width: 900px) {
-  .app-container {
-    padding: 0.5rem 1rem 2rem 1rem !important;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  .layout-principal {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 1.5rem;
-  }
-
-  .seccion-libros {
-    width: 100% !important;
-    flex: none !important;
-    order: 1;
-  }
-
-  .seccion-sidebar {
-    width: 100% !important;
-    min-width: 0 !important;
-    flex: none !important;
-    order: 2;
+    font-size: 1.25rem !important;
+    text-align: center !important;
+    margin-bottom: 1rem !important;
   }
 
   .grid-tarjetas {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 0.9rem;
-    width: 100%;
-  }
-
-  .titulo-seccion {
-    text-align: center;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+    gap: 0.9rem !important;
+    width: 100% !important;
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 360px) {
   .grid-tarjetas {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 0.7rem;
+    gap: 0.6rem !important;
   }
 }

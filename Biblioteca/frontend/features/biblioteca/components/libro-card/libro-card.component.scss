@@ -162,3 +162,14 @@
     padding: 3px 8px;
   }
 }
+
+@media (max-width: 768px) {
+  .libro-card {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .portada-wrapper {
+    height: 210px !important;
+  }
+}
