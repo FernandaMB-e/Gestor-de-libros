@@ -1,19 +1,13 @@
 .contenedor-principal {
   background: #F2FFF5;
-  width: 100%;
-  min-height: 100vh;
-  padding: 50px;
-  box-sizing: border-box;
+  max-width: 1500px;
+  padding: 35px 45px;
 }
 
-.cabecera{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.corazon{
-    align-self:flex-end;
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn-volver{
@@ -39,10 +33,6 @@
   color:#e53935;
 }
 
-.texto-ayuda{
-    line-height:1.5;
-}
-
 h1 {
   margin: 25px 0;
 }
@@ -65,66 +55,30 @@ label {
 }
 
 input,
-select{
+select,
+textarea {
   padding: 12px;
   border: 1px solid #d8d8d8;
   border-radius: 6px;
   font-size: 14px;
-}
-
-textarea {
-  width: 100%;
-  min-height: 120px;
-  padding: 15px;
   resize: none;
-  border: 1px solid #cfcfcf;
-  border-radius: 10px;
-  font-size: 15px;
-  font-family: inherit;
-  box-sizing: border-box;
 }
 
 .subir-imagen {
-    width: 100%;
-    height: 180px;
-    border: 2px dashed #cfcfcf;
-    border-radius: 10px;
-    background: #fafafa;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all .2s ease;
-    box-sizing: border-box;
-}
-
-.subir-imagen:hover {
-  border-color: #2d7c67;
-  background: #f5fbf8;
-}
-
-.subir-imagen strong {
-  font-size: 20px;
-  color: #2d7c67;
-  margin-bottom: 8px;
-}
-
-.subir-imagen span {
-  color: #6e6e6e;
-  font-size: 14px;
+  height: 180px;
+  border: 2px dashed #cfcfcf;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .radios {
   display: flex;
   gap: 20px;
   margin-top: 10px;
-}
-
-.radios label{
-    display:flex;
-    align-items:center;
-    gap:8px;
 }
 
 .texto-ayuda {
@@ -145,7 +99,6 @@ textarea {
   margin-top: 10px;
   display:flex;
   gap:4px;
-  flex-wrap: wrap;
 }
 
 .estrellas mat-icon{
@@ -153,12 +106,11 @@ textarea {
   color:#f5b301;
 }
 
-.botones{
-    display:flex;
-    justify-content:flex-end;
-    gap:15px;
-    margin-top:20px;
-    flex-wrap:wrap;
+.botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
 }
 
 .btn-cancelar {
@@ -186,17 +138,25 @@ textarea {
   margin-bottom:10px;
 }
 
-.area-upload {
-    width: 100%;
-    height: 220px;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
-    background: #fafafa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
+.area-upload{
+  width: 300px;
+  height: 180px;
+  border: 2px dashed #cfcfcf;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  background: white;
+}
+
+.preview-imagen{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .error{
@@ -204,117 +164,4 @@ textarea {
   font-size:12px;
   margin-top:4px;
   display:block;
-}
-
-input:disabled {
-  background: #a7a2a288;
-  color: #9c9393;
-  cursor: not-allowed;
-}
-
-@media (max-width: 1024px) {
-
-.formulario-grid{
-    gap:40px;
-}
-
-.columna{
-    width:100%;
-}
-
-}
-
-@media (max-width:900px){
-
-  .cabecera{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:20px;
-}
-
-.corazon{
-    align-self:flex-end;
-}
-
-.contenedor-principal{
-    padding:20px;
-}
-
-.formulario-grid{
-    display:flex;
-    flex-direction:column;
-    gap:30px;
-}
-
-.columna{
-    width:100%;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    box-sizing:border-box;
-}
-
-.area-upload{
-    width:100%;
-}
-
-.preview-imagen{
-    width:100%;
-    height:100%;
-    max-height:350px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
-.prestamo-box{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.radios{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.estrellas{
-    justify-content:flex-start;
-}
-
-.btn-cancelar,
-.btn-guardar{
-    width:100%;
-}
-
-}
-
-@media (max-width:480px){
-
-h1{
-    font-size:32px;
-}
-
-.btn-volver{
-    font-size:18px;
-}
-
-label{
-    font-size:15px;
-}
-
-input,
-select,
-textarea{
-    font-size:15px;
-    box-sizing:border-box;
-}
-
-.estrellas mat-icon{
-    font-size:30px;
-}
-
 }
