@@ -7,24 +7,24 @@
   margin-bottom: 2rem;
 }
 
-/* El truco de la línea única */
+
 .fila-unica {
   display: flex;
-  flex-wrap: wrap; /* Si la pantalla es chica, lo pasa abajo automáticamente */
-  align-items: center; /* Centra todo en la misma línea horizontal */
-  gap: 1rem; /* Espacio uniforme entre TODOS los elementos */
+  flex-wrap: wrap; 
+  align-items: center; 
+  gap: 1rem; 
 }
 
-/* 1. Buscador */
+
 .buscador-input {
-  flex: 1; /* Esto hace que el buscador ocupe todo el espacio sobrante */
+  flex: 1; 
   min-width: 200px;
-  margin-bottom: -1.25em; /* Quita el margen de error invisible */
+  margin-bottom: -1.25em; 
 }
 
-/* 2. Todos los botones sólidos */
+
 .btn-buscar, .btn-favoritos, .btn-todos {
-  height: 56px; /* Altura idéntica a los desplegables */
+  height: 56px; 
   border-radius: 8px;
   color: white !important;
   font-weight: 500;
@@ -35,26 +35,25 @@
 .btn-favoritos { background-color: #3b82f6 !important; }
 .btn-todos { background-color: #eab308 !important; }
 
-/* 3. Desplegables (Selects) */
+
 .filtro-select {
   width: 150px;
-  margin-bottom: -1.25em; /* Alineación perfecta con los botones */
+  margin-bottom: -1.25em; 
    color: white !important;
 }
 
-/* === SOLUCIÓN AL COLOR DE LOS DESPLEGABLES === */
+
 ::ng-deep {
-  /* Apagamos los bordes feos de Material */
+  
   .filtro-select .mdc-notched-outline {
     display: none !important; 
   }
 
-  /* Redondeamos el contenedor principal */
+  
   .filtro-select .mdc-text-field--outlined {
     border-radius: 8px;
   }
 
-  /* Pintamos el fondo abarcando el 100% de la caja */
   .btn-estado .mdc-text-field--outlined { background-color: #ea9121 !important; }
   .btn-disposicion .mdc-text-field--outlined { background-color: #d946ef !important; }
   .btn-puntuacion .mdc-text-field--outlined { background-color: #ec4899 !important; }
@@ -63,14 +62,12 @@
   width: 240px !important; 
 }
 
-  /* Aseguramos que el texto, label y la flechita sean blancos */
   .filtro-select .mat-mdc-select-value-text, 
   .filtro-select .mat-mdc-select-arrow, 
   .filtro-select .mat-mdc-form-field-label {
     color: rgb(255, 255, 255) !important;
   }
 
-  /* Estilos de las estrellas */
   .opcion-puntuacion { 
     display: flex; 
     align-items: center; 
@@ -82,5 +79,104 @@
     font-size: 20px; 
     height: 20px; 
     width: 20px; 
+  }
+}
+
+@media (max-width: 600px) {
+  .barra-filtros-container {
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .fila-unica {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    align-items: center;
+  }
+
+  .buscador-input {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  .btn-buscar,
+  .btn-favoritos,
+  .btn-todos,
+  .filtro-select {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    font-size: 0.78rem;
+    padding: 0 0.4rem;
+    margin-bottom: 0;
+  }
+
+  .btn-buscar,
+  .btn-favoritos,
+  .btn-todos {
+    border-radius: 7px;
+  }
+
+  ::ng-deep {
+    .mat-mdc-form-field {
+      width: 100%;
+    }
+
+    .btn-puntuacion {
+      width: 100% !important;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      height: 44px !important;
+      border-radius: 7px !important;
+    }
+
+    .mat-mdc-form-field-flex {
+      height: 44px !important;
+      align-items: center !important;
+    }
+
+    .mat-mdc-form-field-infix {
+      min-height: 44px !important;
+      padding-top: 10px !important;
+      padding-bottom: 8px !important;
+    }
+
+    .mat-mdc-select-value,
+    .mat-mdc-select-placeholder,
+    .mat-mdc-select-value-text {
+      font-size: 0.8rem !important;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none !important;
+    }
+
+    .buscador-input .mat-mdc-text-field-wrapper {
+      height: 48px !important;
+    }
+
+    .buscador-input .mat-mdc-form-field-flex {
+      height: 48px !important;
+    }
+
+    .buscador-input .mat-mdc-form-field-infix {
+      min-height: 48px !important;
+      padding-top: 12px !important;
+      padding-bottom: 8px !important;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .fila-unica {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .buscador-input {
+    grid-column: 1 / -1;
   }
 }

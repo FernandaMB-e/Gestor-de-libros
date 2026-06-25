@@ -1,41 +1,39 @@
-/* Tarjeta principal */
+
 .libro-card {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* Evita que la imagen se salga de los bordes redondeados */
+  overflow: hidden; 
   position: relative;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
-  max-width: 240px; /* Ancho estándar de una tarjeta de libro */
+  max-width: 240px; 
   display: flex;
   flex-direction: column;
 
-  /* Efecto de elevación al pasar el mouse */
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   }
 }
 
-/* --- SECCIÓN IMAGEN Y BOTONES FLOTANTES --- */
 .portada-wrapper {
   position: relative;
   width: 100%;
-  height: 340px; /* Alto ideal para portadas de libros */
-  background-color: #f3f4f6; /* Fondo gris claro mientras carga */
+  height: 340px;
+  background-color: #f3f4f6; 
 
   .portada-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Asegura que la imagen llene el espacio sin deformarse */
+    object-fit: cover; 
   }
 
-  /* Estilos compartidos para los botones flotantes */
+  
   .btn-favorito {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.85); /* Blanco semi-transparente */
-    backdrop-filter: blur(4px); /* Efecto cristal */
+    background-color: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(4px); 
     border-radius: 50%;
     transition: background-color 0.2s ease;
 
@@ -67,16 +65,16 @@
   }
 
   .corazon-rojo {
-    color: #ef4444 !important; /* El rojo vibrante que pediste */
+    color: #ef4444 !important; 
   }
 }
 
-/* --- SECCIÓN DE TEXTOS Y BADGES --- */
+
 .info-container {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Espaciado uniforme entre los elementos */
+  gap: 8px; 
 }
 
 .titulo {
@@ -86,7 +84,7 @@
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Pone "..." si el título es muy largo */
+  text-overflow: ellipsis; 
 }
 
 .autor {
@@ -95,7 +93,7 @@
   margin: 0;
 }
 
-/* Estrellas de puntuación */
+
 .puntuacion {
   display: flex;
   align-items: center;
@@ -108,10 +106,10 @@
   }
 
   .star-gold { color: #FFD700; }
-  .star-gray { color: #e5e7eb; } /* Estrellas vacías en gris clarito */
+  .star-gray { color: #e5e7eb; } 
 }
 
-/* Etiqueta del estado de lectura */
+
 .estado-badge {
   display: inline-block;
   padding: 4px 12px;
@@ -119,12 +117,48 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-align: center;
-  align-self: flex-start; /* Para que la caja se ajuste al texto y no ocupe todo el ancho */
+  align-self: flex-start; 
   color: white;
 }
 
-/* Colores haciendo match con los botones de tu buscador */
 .badge-leyendo { background-color: #ea9121; }
-.badge-leidos { background-color: #ec4899; } /* Rosado/Fucsia para diferenciarlo */
+.badge-leidos { background-color: #ec4899; }
 .badge-pendientes { background-color: #3b82f6; }
 .badge-default { background-color: #9ca3af; }
+
+
+@media (max-width: 600px) {
+  .libro-card {
+    max-width: none !important;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .portada-wrapper {
+    height: 210px !important;
+  }
+
+  .info-container {
+    padding: 0.7rem;
+    gap: 5px;
+  }
+
+  .titulo {
+    font-size: 0.8rem;
+  }
+
+  .autor {
+    font-size: 0.72rem;
+  }
+
+  .puntuacion mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .estado-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+}

@@ -3,10 +3,8 @@
   
  
   width: 100vw;
-  margin-left: calc(50% - 50vw); /* Centra el banner perfectamente sin cortar el texto */
-  border-radius: 0; /* Sin bordes porque toca las orillas del monitor */
-  
-  /* El padding lateral (10vw) evita que el texto se pegue a las orillas */
+  margin-left: calc(50% - 50vw); 
+  border-radius: 0; 
   padding: 2.5rem 10vw; 
   
   display: flex;
@@ -19,10 +17,9 @@
   margin-bottom: 2rem;
 }
 
-/* Estilos para el texto central */
 .contenido-texto {
   position: relative; 
-  z-index: 10; /* Siempre al frente */
+  z-index: 10; 
   text-align: center;
   width: 100%; 
 
@@ -42,23 +39,78 @@
   }
 }
 
-/* Estilos para las imágenes de los libros */
+
 .img-decoracion {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); /* Centrado vertical */
-  height: 140%; /* Buen tamaño sin exagerar */
+  transform: translateY(-50%); 
+  height: 140%; 
   pointer-events: none; 
   z-index: 1; 
   
   mix-blend-mode: multiply; 
-  opacity: 0.4; /* Opacidad sutil para que parezcan marcas de agua */
+  opacity: 0.4; 
 
   &.izq {
-    left: 2vw; /* Ligeramente separadas de la orilla de la pantalla */
+    left: 2vw;
   }
 
   &.der {
     right: 2vw;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .banner-saludo {
+    min-height: 130px;
+    padding: 2rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contenido-texto {
+    .saludo-principal {
+      font-size: 2rem;
+    }
+
+    .saludo-subtitulo {
+      font-size: 1rem;
+    }
+  }
+
+  .img-decoracion {
+    height: 115%;
+    opacity: 0.25;
+
+    &.izq {
+      left: -8vw;
+    }
+
+    &.der {
+      right: -8vw;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-saludo {
+    min-height: 120px;
+    padding: 1.8rem 1rem;
+  }
+
+  .contenido-texto {
+    .saludo-principal {
+      font-size: 1.6rem;
+    }
+
+    .saludo-subtitulo {
+      font-size: 0.9rem;
+    }
+  }
+
+  .img-decoracion {
+    height: 100%;
+    opacity: 0.18;
   }
 }
