@@ -252,4 +252,34 @@
     width: 120px;
     height: 120px;
   }
+  @media (max-width: 768px) {
+  .auth-pantalla {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .lado-imagen {
+    display: none;
+  }
+
+  .lado-login {
+    width: 100%;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .auth-header h2 {
+    font-size: 2rem;
+  }
+
+  .btn-entrar {
+    height: 50px;
+  }
+}
 }
