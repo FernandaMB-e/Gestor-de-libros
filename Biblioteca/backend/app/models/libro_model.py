@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 class Libro(BaseModel):
-
     titulo: str
     autor: str
     anio: int
@@ -23,3 +22,5 @@ class Libro(BaseModel):
     calificacion: int
 
     resena: str
+
+    usuarioId: str | None = None
