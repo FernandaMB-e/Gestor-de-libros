@@ -82,101 +82,72 @@
   }
 }
 
+/* ===== RESPONSIVO FINAL FILTROS ===== */
+
 @media (max-width: 600px) {
   .barra-filtros-container {
-    padding: 1rem;
-    margin-bottom: 1.2rem;
+    padding: 1rem !important;
+    margin-bottom: 1.2rem !important;
   }
 
   .fila-unica {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.7rem;
-    align-items: center;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.7rem !important;
   }
 
   .buscador-input {
-    grid-column: 1 / -1;
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 0;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   .btn-buscar,
   .btn-favoritos,
   .btn-todos,
   .filtro-select {
-    width: 100%;
-    min-width: 0;
-    height: 44px;
-    font-size: 0.78rem;
-    padding: 0 0.4rem;
-    margin-bottom: 0;
-  }
-
-  .btn-buscar,
-  .btn-favoritos,
-  .btn-todos {
-    border-radius: 7px;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 50px !important;
+    font-size: 0.78rem !important;
+    padding: 0 0.35rem !important;
+    margin-bottom: 0 !important;
   }
 
   ::ng-deep {
-    .mat-mdc-form-field {
-      width: 100%;
-    }
-
     .btn-puntuacion {
       width: 100% !important;
     }
 
+    .mat-mdc-form-field {
+      width: 100% !important;
+    }
+
     .mat-mdc-text-field-wrapper {
-      height: 44px !important;
+      height: 50px !important;
       border-radius: 7px !important;
     }
 
     .mat-mdc-form-field-flex {
-      height: 44px !important;
+      height: 50px !important;
       align-items: center !important;
     }
 
     .mat-mdc-form-field-infix {
-      min-height: 44px !important;
-      padding-top: 10px !important;
+      min-height: 50px !important;
+      padding-top: 13px !important;
       padding-bottom: 8px !important;
     }
 
     .mat-mdc-select-value,
     .mat-mdc-select-placeholder,
     .mat-mdc-select-value-text {
-      font-size: 0.8rem !important;
+      font-size: 0.78rem !important;
     }
 
     .mat-mdc-form-field-subscript-wrapper {
       display: none !important;
     }
-
-    .buscador-input .mat-mdc-text-field-wrapper {
-      height: 48px !important;
-    }
-
-    .buscador-input .mat-mdc-form-field-flex {
-      height: 48px !important;
-    }
-
-    .buscador-input .mat-mdc-form-field-infix {
-      min-height: 48px !important;
-      padding-top: 12px !important;
-      padding-bottom: 8px !important;
-    }
-  }
-}
-
-@media (max-width: 380px) {
-  .fila-unica {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .buscador-input {
-    grid-column: 1 / -1;
   }
 }

@@ -178,18 +178,83 @@
   font-weight: 600;
 }
 
+/* ===== RESPONSIVO FINAL VISTA PRINCIPAL ===== */
+
 @media (max-width: 768px) {
   .app-container {
     padding: 0.5rem 1rem 2rem 1rem !important;
-    max-width: 100% !important;
     width: 100% !important;
+    max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
   }
 
+  .header-principal {
+    padding: 0.8rem 1rem !important;
+    gap: 0.4rem !important;
+    justify-content: space-between !important;
+  }
+
+  .header-principal .logo-contenedor {
+    gap: 0.45rem !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  .header-principal .logo-contenedor .logo-img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .header-principal .logo-contenedor .logo-biblioteca {
+    font-size: 1.35rem !important;
+    white-space: nowrap !important;
+  }
+
+  .header-principal .acciones-usuario {
+    gap: 0.2rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .header-principal .btn-perfil {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+  }
+
+  .header-principal .btn-perfil mat-icon {
+    font-size: 23px !important;
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  .header-principal button[mat-button] {
+    font-size: 0.72rem !important;
+    line-height: 1.1 !important;
+    padding: 0 0.25rem !important;
+    min-width: auto !important;
+    width: 54px !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
+  .contenedor-acciones-top {
+    justify-content: center !important;
+    margin-bottom: 1.2rem !important;
+  }
+
+  .btn-agregar-top {
+    width: 70% !important;
+    max-width: 230px !important;
+    height: 46px !important;
+    font-size: 0.9rem !important;
+  }
+
   .layout-principal {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     width: 100% !important;
+    gap: 1.5rem !important;
     margin-top: 1.2rem !important;
   }
 
@@ -197,7 +262,7 @@
     width: 100% !important;
     max-width: 100% !important;
     flex: none !important;
-    display: block !important;
+    order: 1 !important;
   }
 
   .seccion-sidebar {
@@ -205,14 +270,8 @@
     max-width: 100% !important;
     min-width: 0 !important;
     flex: none !important;
-    display: block !important;
-    margin-top: 2rem !important;
-  }
-
-  app-resumen-estadisticas {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    order: 2 !important;
+    margin-top: 1rem !important;
   }
 
   .titulo-seccion {
@@ -229,9 +288,38 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
+  .header-principal {
+    padding: 0.75rem 0.7rem !important;
+  }
+
+  .header-principal .logo-contenedor .logo-img {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .header-principal .logo-contenedor .logo-biblioteca {
+    font-size: 1.12rem !important;
+  }
+
+  .header-principal .btn-perfil {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .header-principal .btn-perfil mat-icon {
+    font-size: 21px !important;
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+  .header-principal button[mat-button] {
+    font-size: 0.68rem !important;
+    width: 48px !important;
+  }
+
   .grid-tarjetas {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 0.6rem !important;
+    gap: 0.65rem !important;
   }
 }
