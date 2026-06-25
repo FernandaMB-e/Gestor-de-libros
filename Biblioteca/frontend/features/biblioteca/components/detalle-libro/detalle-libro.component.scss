@@ -1,5 +1,5 @@
 .detalle-container{
-  background:#edf7ef;
+  background:#ffffff !important;
   padding:40px;
   min-height:100vh;
 }
@@ -50,12 +50,6 @@
   padding:8px 15px;
   border-radius:6px;
   cursor:pointer;
-}
-
-.contenido{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
 }
 
 .portada{
@@ -115,10 +109,9 @@
 }
 
 .columna-info{
-  font-size: 15px; 
-  flex:1;
-  margin-right: 70px;
-  margin-top: 20px;
+    flex:1;
+    min-width:0;
+    margin-top:20px;
 }
 
 .columna-portada{
@@ -131,4 +124,139 @@
   color:#4f4f4f;
   margin-top:0;
   margin-bottom:20px;
+}
+
+@media (max-width:1024px){
+
+.detalle-container{
+    padding:30px;
+}
+
+.portada{
+    width:280px;
+    height:420px;
+}
+
+.columna-portada{
+    margin-right:40px;
+    margin-left:0;
+}
+
+.columna-info{
+    margin-right:40px;
+}
+
+.columna-info h2{
+    font-size:44px;
+}
+
+.info-grid{
+    grid-template-columns:180px auto;
+    column-gap:20px;
+}
+
+.columna-resena{
+    width:100%;
+    max-width: 500px;
+    margin-top:40px;
+    margin-right:0;
+
+}
+
+}
+
+@media (max-width:900px){
+
+.detalle-container{
+    padding:20px;
+}
+
+.header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.acciones{
+    width:100%;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+}
+
+.contenido{
+    display:flex;
+    gap:50px;
+    align-items:flex-start;
+}
+
+.columna-portada{
+    margin:0 0 30px 0;
+}
+
+.portada{
+    width:260px;
+    height:auto;
+}
+
+.columna-info{
+    width:100%;
+    margin:0;
+}
+
+.columna-info h2{
+    font-size:38px;
+}
+
+.info-grid{
+    grid-template-columns:170px auto;
+    column-gap:20px;
+}
+
+.columna-resena{
+    width:100%;
+    margin:40px 0 0 0;
+}
+
+}
+
+@media (max-width:600px){
+
+.btn-volver{
+    font-size:18px;
+}
+
+.columna-info h2{
+    font-size:30px;
+}
+
+.autor{
+    font-size:18px;
+}
+
+.info-grid{
+    grid-template-columns:1fr;
+    row-gap:10px;
+}
+
+.estado{
+    margin-top:10px;
+}
+
+.estrellas{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+}
+
+.btn-editar,
+.btn-eliminar{
+    width:100%;
+}
+
+.acciones{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    gap:10px;
+}
+
 }

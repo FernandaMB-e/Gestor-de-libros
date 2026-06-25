@@ -1,13 +1,19 @@
 .contenedor-principal {
   background: #F2FFF5;
-  max-width: auto;
-  padding: 50px 50px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
 }
 
-.cabecera {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.cabecera{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.corazon{
+    align-self:flex-end;
 }
 
 .btn-volver{
@@ -31,6 +37,10 @@
   width:32px;
   height:32px;
   color:#e53935;
+}
+
+.texto-ayuda{
+    line-height:1.5;
 }
 
 h1 {
@@ -105,17 +115,16 @@ textarea {
   font-size: 14px;
 }
 
-.preview-imagen {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
 .radios {
   display: flex;
   gap: 20px;
   margin-top: 10px;
+}
+
+.radios label{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
 .texto-ayuda {
@@ -136,6 +145,7 @@ textarea {
   margin-top: 10px;
   display:flex;
   gap:4px;
+  flex-wrap: wrap;
 }
 
 .estrellas mat-icon{
@@ -143,11 +153,12 @@ textarea {
   color:#f5b301;
 }
 
-.botones {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  margin-top: 20px;
+.botones{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
 }
 
 .btn-cancelar {
@@ -188,13 +199,6 @@ textarea {
     cursor: pointer;
 }
 
-.preview-imagen{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
 .error{
   color:#d32f2f;
   font-size:12px;
@@ -206,4 +210,111 @@ input:disabled {
   background: #a7a2a288;
   color: #9c9393;
   cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+
+.formulario-grid{
+    gap:40px;
+}
+
+.columna{
+    width:100%;
+}
+
+}
+
+@media (max-width:900px){
+
+  .cabecera{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.corazon{
+    align-self:flex-end;
+}
+
+.contenedor-principal{
+    padding:20px;
+}
+
+.formulario-grid{
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+.columna{
+    width:100%;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    box-sizing:border-box;
+}
+
+.area-upload{
+    width:100%;
+}
+
+.preview-imagen{
+    width:100%;
+    height:100%;
+    max-height:350px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.prestamo-box{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.radios{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.estrellas{
+    justify-content:flex-start;
+}
+
+.btn-cancelar,
+.btn-guardar{
+    width:100%;
+}
+
+}
+
+@media (max-width:480px){
+
+h1{
+    font-size:32px;
+}
+
+.btn-volver{
+    font-size:18px;
+}
+
+label{
+    font-size:15px;
+}
+
+input,
+select,
+textarea{
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+.estrellas mat-icon{
+    font-size:30px;
+}
+
 }
